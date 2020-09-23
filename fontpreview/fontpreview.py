@@ -21,6 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region imports
+import os
 from PIL import Image, ImageDraw, ImageFont
 
 
@@ -28,10 +29,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 # region classes
 class FontPreview:
+    """
+    Class that represents the preview of a font
+    """
     def __init__(self, font):
         """
         Object that represents the preview of a font
-        :param font: font name or font file
+        :param font: font file
         """
         # Define properties
         self.font_size = 64
@@ -47,5 +51,13 @@ class FontPreview:
         self.image = Image.new(self.color_system, self.dimension, color=self.bg_color)
         draw = ImageDraw.Draw(self.image)
         draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font)
+
+    def save(self, path=os.path.abspath(os.getcwd())):
+        """
+        Save the preview font
+        :param path: path where you want to save the preview font
+        :return: None
+        """
+        self.image.save(path)
 
 # endregion
