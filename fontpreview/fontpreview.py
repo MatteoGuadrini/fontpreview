@@ -38,6 +38,7 @@ class FontPreview:
         :param font: font file
         """
         # Define properties
+        self.image = None
         self.font_size = 64
         self.font_text = 'a b c d e f'
         self.font_position = (200, 140)
