@@ -48,16 +48,23 @@ class FontPreview:
         self.fg_color = 'black'
         self.dimension = (700, 327)
         # Create default image
-        self.image = Image.new(self.color_system, self.dimension, color=self.bg_color)
-        draw = ImageDraw.Draw(self.image)
-        draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font)
+        self.draw()
 
-    def save(self, path=os.path.abspath(os.getcwd())):
+    def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpreview.png')):
         """
         Save the preview font
         :param path: path where you want to save the preview font
         :return: None
         """
         self.image.save(path)
+
+    def draw(self):
+        """
+        Draw image with text based on properties of this object
+        :return: None
+        """
+        self.image = Image.new(self.color_system, self.dimension, color=self.bg_color)
+        draw = ImageDraw.Draw(self.image)
+        draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font)
 
 # endregion

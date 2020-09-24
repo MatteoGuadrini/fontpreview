@@ -9,7 +9,7 @@ Simple example:
 from fontpreview import FontPreview
 
 fp = FontPreview('noto.ttf')
-fp.save('/tmp/fp.png')  # White backgroung with 'abcdef' letters 15pt in black
+fp.save('/tmp/fp.png')  # White backgroung with 'a b c d e f' letters 64pt in black
 ```
 
 Banner example:
