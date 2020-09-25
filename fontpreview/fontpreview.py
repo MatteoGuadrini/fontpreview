@@ -59,7 +59,7 @@ class FontPreview:
         """
         self.image.save(path)
 
-    def draw(self):
+    def draw(self, align='left'):
         """
         Draw image with text based on properties of this object
         :return: None
@@ -67,10 +67,10 @@ class FontPreview:
         if self.bg_image:
             self.image = Image.open(self.bg_image)
             draw = ImageDraw.Draw(self.image)
-            draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font)
+            draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font, align=align)
         else:
             self.image = Image.new(self.color_system, self.dimension, color=self.bg_color)
             draw = ImageDraw.Draw(self.image)
-            draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font)
+            draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font, align=align)
 
 # endregion
