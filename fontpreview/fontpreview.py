@@ -67,6 +67,16 @@ class FontPreview:
         # Create default image
         self.draw()
 
+    def __str__(self):
+        """
+        String representation of font preview
+        :return: string
+        """
+        return "font_name:{font},font_size:{size},text:{text},text_position:{position},dimension:{dimension}".format(
+            font=self.font.getname(), size=self.font_size, text=self.font_text,
+            position=self.font_position, dimension=self.dimension
+        )
+
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpreview.png')):
         """
         Save the preview font
