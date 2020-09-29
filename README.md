@@ -16,8 +16,8 @@ Banner example:
 ```python
 from fontpreview import FontBanner
 
-fb = FontBanner('noto.ttf', 'landscape', background='#cfe8cf', mode='fontname')
-fb.save('/tmp/fb.png')  # Light green landscape backgroung with 'Noto' font name in black
+fb = FontBanner('noto.ttf', 'landscape', bg_color=(153, 153, 255), mode='fontname')
+fb.save('/tmp/fb.png')  # Light purple landscape backgroung with 'Noto' font name in black
 ```
 
 ## Open source

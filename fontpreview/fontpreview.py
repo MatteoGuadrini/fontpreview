@@ -78,6 +78,7 @@ class FontPreview:
     def draw(self, align='left'):
         """
         Draw image with text based on properties of this object
+        :param align: alignment of text. Available 'left', 'center' and 'right'
         :return: None
         """
         # Set an image
@@ -100,6 +101,22 @@ class FontPreview:
         # Set size of font
         self.font_size = size
         self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
+        # Create default image
+        self.draw()
+
+    def set_text_position(self, position):
+        """
+        Set position of text
+        :param position: Position can be a tuple with x and y axis, or a string.
+        The strings available are 'center', 'top', 'below', 'rcenter', 'rtop', 'rbelow', 'lcenter', 'ltop' and 'lbelow'.
+        :return: None
+        """
+        if isinstance(position, tuple):
+            self.font_position = position
+        else:
+            self.font_position = CALC_POSITION.get(position, 'center')(
+                self.dimension, self.font.getsize(self.font_text)
+            )
         # Create default image
         self.draw()
 
