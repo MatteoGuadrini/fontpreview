@@ -24,6 +24,21 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 
+# endregion
+
+# region variable
+CALC_POSITION = {
+    'center': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, (ixy[1] - fxy[1]) / 2),
+    'top': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, 0),
+    'below': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, (ixy[1] - fxy[1])),
+    'rcenter': lambda ixy, fxy: ((ixy[0] - fxy[0]), (ixy[1] - fxy[1]) / 2),
+    'rtop': lambda ixy, fxy: ((ixy[0] - fxy[0]), 0),
+    'rbelow': lambda ixy, fxy: ((ixy[0] - fxy[0]), (ixy[1] - fxy[1])),
+    'lcenter': lambda ixy, fxy: (0, (ixy[1] - fxy[1]) / 2),
+    'ltop': lambda ixy, fxy: (0, 0),
+    'lbelow': lambda ixy, fxy: (0, (ixy[1] - fxy[1])),
+}
+
 
 # endregion
 
@@ -32,6 +47,7 @@ class FontPreview:
     """
     Class that represents the preview of a font
     """
+
     def __init__(self, font):
         """
         Object that represents the preview of a font
@@ -41,13 +57,13 @@ class FontPreview:
         self.image = None
         self.font_size = 64
         self.font_text = 'a b c d e f'
-        self.font_position = (200, 140)
         self.font = ImageFont.truetype(font=font, size=self.font_size)
         self.color_system = 'RGB'
         self.bg_image = None
         self.bg_color = 'white'
         self.fg_color = 'black'
         self.dimension = (700, 327)
+        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
         # Create default image
         self.draw()
 
