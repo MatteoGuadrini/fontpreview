@@ -47,3 +47,21 @@ class FontBanner(FontPreview):
         # Create default image
         self.draw()
 
+    def set_orientation(self, orientation):
+        """
+        Set orientation of banner
+        :param orientation: the orientation of the banner; 'landscape' or 'portrait'
+        :return: None
+        """
+        LANDSCAPE = (1653, 560)
+        PORTRAIT = (560, 1653)
+        # Calculate banner size
+        if isinstance(orientation, tuple):
+            self.dimension = orientation
+            return None
+        if orientation == 'landscape':
+            self.dimension = LANDSCAPE
+        elif orientation == 'portrait':
+            self.dimension = PORTRAIT
+        else:
+            raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
