@@ -124,7 +124,7 @@ class FontPreview:
         if isinstance(position, tuple):
             self.font_position = position
         else:
-            self.font_position = CALC_POSITION.get(position, 'center')(
+            self.font_position = CALC_POSITION.get(position, CALC_POSITION['center'])(
                 self.dimension, self.font.getsize(self.font_text)
             )
         # Create default image

@@ -70,3 +70,30 @@ class FontBanner(FontPreview):
             raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
         # Recalculate font position
         self.set_text_position(font_position)
+        # Create default image
+        self.draw()
+
+    def set_mode(self, mode, align='center'):
+        """
+        Set the text mode
+        :param mode: mode that sets the text in the banner
+        :param align: alignment of text. Available 'left', 'center' and 'right'
+        :return: None
+        """
+        MODE = {
+            'letter': 'abcdef\nghijkl\nmnopqr\nstuvwxyz',
+            'alpha': 'Aa Bb Cc Dd Ee Ff\n1 2 3 4 5 6 7 8 9 0',
+            'fontname': self.font.getname(),
+            'paragraph': 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.',
+            'combination': '{0}\n{1}'.format(self.font.getname(),
+                                             'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.'
+                                             )
+        }
+        # Verify is mode exists
+        if mode in MODE:
+            self.mode = mode
+            self.font_text = MODE.get(mode)
+            # Create default image
+            self.draw(align=align)
+        else:
+            raise ValueError('mode is "letter", "alpha", "fontname", "paragraph" and "combination"')
