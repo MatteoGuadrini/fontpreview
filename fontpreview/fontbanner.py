@@ -110,4 +110,3 @@ class FontBanner(FontPreview):
         img = Image.open(image)
         # Add image
         self.image.paste(img, position)
-        self
