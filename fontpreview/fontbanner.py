@@ -21,6 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .fontpreview import FontPreview, CALC_POSITION
+from PIL import Image
 
 
 class FontBanner(FontPreview):
@@ -43,10 +44,9 @@ class FontBanner(FontPreview):
         self.bg_color = bg_color
         self.fg_color = fg_color
         self.mode = mode
-        self.set_mode(mode=mode)
         self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
         # Create default image
-        self.draw()
+        self.set_mode(mode=mode)
 
     def set_orientation(self, orientation, font_position='center'):
         """
@@ -98,3 +98,16 @@ class FontBanner(FontPreview):
             self.draw(align=align)
         else:
             raise ValueError('mode is "letter", "alpha", "fontname", "paragraph" and "combination"')
+
+    def add_image(self, image, position):
+        """
+        Adds an additional image to the banner
+        :param image: path of image
+        :param position: position of image
+        :return: None
+        """
+        # Create image
+        img = Image.open(image)
+        # Add image
+        self.image.paste(img, position)
+        self
