@@ -82,7 +82,7 @@ class FontBanner(FontPreview):
         :return: None
         """
         MODE = {
-            'letter': 'abcdef\nghijkl\nmnopqr\nstuvwxyz',
+            'letter': 'a b c d e f\ng h i j k l\nm n o p q r\ns t u v w x y z',
             'alpha': 'Aa Bb Cc Dd Ee Ff\n1 2 3 4 5 6 7 8 9 0',
             'fontname': self.font.getname(),
             'paragraph': 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.',
@@ -107,6 +107,9 @@ class FontBanner(FontPreview):
         :return: None
         """
         # Create image
-        img = Image.open(image)
+        if isinstance(image, FontPreview):
+            img = image.image
+        else:
+            img = Image.open(image)
         # Add image
         self.image.paste(img, position)
