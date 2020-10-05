@@ -122,5 +122,9 @@ class FontBanner(FontPreview):
             img = image.image
         else:
             img = Image.open(image)
+        # Check if the image is bigger than the banner
+        if img.size > self.dimension:
+            width, height = self.dimension
+            img = resize(img, (width//2, height//2))
         # Add image
         self.image.paste(img, position)
