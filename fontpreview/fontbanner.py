@@ -24,6 +24,17 @@ from .fontpreview import FontPreview, CALC_POSITION
 from PIL import Image
 
 
+def resize(image, size):
+    """
+    Resize image
+    :param image: image to resize
+    :param size: new size of image
+    :return: Image
+    """
+    # Resize image
+    return image.resize(size)
+
+
 class FontBanner(FontPreview):
     """
     Class that represents the banner of a font
