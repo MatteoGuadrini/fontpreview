@@ -66,24 +66,23 @@ class FontBanner(FontPreview):
         :param font_position: font position respect dimension of banner
         :return: None
         """
-        LANDSCAPE = (1653, 560)
-        PORTRAIT = (560, 1653)
         # Calculate banner size
         if isinstance(orientation, tuple):
             self.dimension = orientation
             # Recalculate font position
             self.set_text_position(font_position)
             return None
-        if orientation == 'landscape':
-            self.dimension = LANDSCAPE
-        elif orientation == 'portrait':
-            self.dimension = PORTRAIT
         else:
-            raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
-        # Recalculate font position
-        self.set_text_position(font_position)
-        # Create default image
-        self.draw()
+            LANDSCAPE = (1653, 560)
+            PORTRAIT = (560, 1653)
+            if orientation == 'landscape':
+                self.dimension = LANDSCAPE
+            elif orientation == 'portrait':
+                self.dimension = PORTRAIT
+            else:
+                raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
+            # Recalculate font position
+            self.set_text_position(font_position)
 
     def set_mode(self, mode, align='center'):
         """
@@ -95,7 +94,7 @@ class FontBanner(FontPreview):
         MODE = {
             'letter': 'a b c d e f\ng h i j k l\nm n o p q r\ns t u v w x y z',
             'alpha': 'Aa Bb Cc Dd Ee Ff\n1 2 3 4 5 6 7 8 9 0',
-            'fontname': self.font.getname(),
+            'fontname': '{0}'.format(self.font.getname()[0]),
             'paragraph': 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.',
             'combination': '{0}\n{1}'.format(self.font.getname(),
                                              'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.'
