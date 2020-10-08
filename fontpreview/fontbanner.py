@@ -20,10 +20,14 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# region imports
 from .fontpreview import FontPreview, CALC_POSITION
 from PIL import Image
 
 
+# endregion
+
+# region functions
 def resize(image, size):
     """
     Resize image
@@ -35,6 +39,9 @@ def resize(image, size):
     return image.resize(size)
 
 
+# endregion
+
+# region classes
 class FontBanner(FontPreview):
     """
     Class that represents the banner of a font
@@ -98,7 +105,8 @@ class FontBanner(FontPreview):
             'paragraph': 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.',
             'combination': '{0}\n{1}'.format(self.font.getname(),
                                              'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.'
-                                             )
+                                             ),
+            'none': ''
         }
         # Verify is mode exists
         if mode in MODE:
@@ -124,6 +132,41 @@ class FontBanner(FontPreview):
         # Check if the image is bigger than the banner
         if img.size > self.dimension:
             width, height = self.dimension
-            img = resize(img, (width//2, height//2))
+            img = resize(img, (width // 2, height // 2))
         # Add image
         self.image.paste(img, position)
+
+
+class FontWall:
+    """
+    Class that represents the wall of fonts
+    """
+
+    def __init__(self, fonts, max_width=3000, max_height=2000):
+        """
+        Object that represents the wall of fonts
+        :param fonts: font list; string or FontPreview object
+        :param max_width: The maximum possible width for the wall
+        :param max_height: The maximum possible height for the wall
+        """
+        # Check if list contains string or FontPreview object
+        if isinstance(fonts, list):
+            self.fonts = []
+            for font in fonts:
+                if isinstance(font, FontPreview):
+                    self.fonts.append(font)
+                else:
+                    _font = FontBanner(font)
+                    self.fonts.append(_font)
+        else:
+            raise TypeError("'fonts' must be a list")
+        # Other properties
+        self.color_system = 'RGB'
+        self.bg_color = 'white'
+        self.max_width = max_width
+        self.max_height = max_height
+        # Build the wall
+        self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+
+
+# endregion
