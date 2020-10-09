@@ -66,6 +66,13 @@ class FontBanner(FontPreview):
         # Create default image
         self.set_mode(mode=mode)
 
+    def __str__(self):
+        """
+        String representation of font banner
+        :return: string
+        """
+        return FontPreview.__str__(self) + ",mode={mode}".format(mode=self.mode)
+
     def set_orientation(self, orientation, font_position='center'):
         """
         Set orientation of banner
