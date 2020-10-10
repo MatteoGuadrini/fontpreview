@@ -20,10 +20,28 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# region imports
 from .fontpreview import FontPreview, CALC_POSITION
 from PIL import Image
 
 
+# endregion
+
+# region functions
+def resize(image, size):
+    """
+    Resize image
+    :param image: image to resize
+    :param size: new size of image
+    :return: Image
+    """
+    # Resize image
+    return image.resize(size)
+
+
+# endregion
+
+# region classes
 class FontBanner(FontPreview):
     """
     Class that represents the banner of a font
@@ -48,6 +66,13 @@ class FontBanner(FontPreview):
         # Create default image
         self.set_mode(mode=mode)
 
+    def __str__(self):
+        """
+        String representation of font banner
+        :return: string
+        """
+        return FontPreview.__str__(self) + ",mode={mode}".format(mode=self.mode)
+
     def set_orientation(self, orientation, font_position='center'):
         """
         Set orientation of banner
@@ -55,24 +80,23 @@ class FontBanner(FontPreview):
         :param font_position: font position respect dimension of banner
         :return: None
         """
-        LANDSCAPE = (1653, 560)
-        PORTRAIT = (560, 1653)
         # Calculate banner size
         if isinstance(orientation, tuple):
             self.dimension = orientation
             # Recalculate font position
             self.set_text_position(font_position)
             return None
-        if orientation == 'landscape':
-            self.dimension = LANDSCAPE
-        elif orientation == 'portrait':
-            self.dimension = PORTRAIT
         else:
-            raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
-        # Recalculate font position
-        self.set_text_position(font_position)
-        # Create default image
-        self.draw()
+            LANDSCAPE = (1653, 560)
+            PORTRAIT = (560, 1653)
+            if orientation == 'landscape':
+                self.dimension = LANDSCAPE
+            elif orientation == 'portrait':
+                self.dimension = PORTRAIT
+            else:
+                raise ValueError('orientation is "landscape","portrait" or tuple(x,y)')
+            # Recalculate font position
+            self.set_text_position(font_position)
 
     def set_mode(self, mode, align='center'):
         """
@@ -82,13 +106,14 @@ class FontBanner(FontPreview):
         :return: None
         """
         MODE = {
-            'letter': 'abcdef\nghijkl\nmnopqr\nstuvwxyz',
+            'letter': 'a b c d e f\ng h i j k l\nm n o p q r\ns t u v w x y z',
             'alpha': 'Aa Bb Cc Dd Ee Ff\n1 2 3 4 5 6 7 8 9 0',
-            'fontname': self.font.getname(),
+            'fontname': '{0}'.format(self.font.getname()[0]),
             'paragraph': 'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.',
             'combination': '{0}\n{1}'.format(self.font.getname(),
                                              'Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.'
-                                             )
+                                             ),
+            'none': ''
         }
         # Verify is mode exists
         if mode in MODE:
@@ -107,6 +132,48 @@ class FontBanner(FontPreview):
         :return: None
         """
         # Create image
-        img = Image.open(image)
+        if isinstance(image, FontPreview):
+            img = image.image
+        else:
+            img = Image.open(image)
+        # Check if the image is bigger than the banner
+        if img.size > self.dimension:
+            width, height = self.dimension
+            img = resize(img, (width // 2, height // 2))
         # Add image
         self.image.paste(img, position)
+
+
+class FontWall:
+    """
+    Class that represents the wall of fonts
+    """
+
+    def __init__(self, fonts, max_width=3000, max_height=2000):
+        """
+        Object that represents the wall of fonts
+        :param fonts: font list; string or FontPreview object
+        :param max_width: The maximum possible width for the wall
+        :param max_height: The maximum possible height for the wall
+        """
+        # Check if list contains string or FontPreview object
+        if isinstance(fonts, list):
+            self.fonts = []
+            for font in fonts:
+                if isinstance(font, FontPreview):
+                    self.fonts.append(font)
+                else:
+                    _font = FontBanner(font)
+                    self.fonts.append(_font)
+        else:
+            raise TypeError("'fonts' must be a list")
+        # Other properties
+        self.color_system = 'RGB'
+        self.bg_color = 'white'
+        self.max_width = max_width
+        self.max_height = max_height
+        # Build the wall
+        self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+
+
+# endregion
