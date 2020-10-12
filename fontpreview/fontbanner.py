@@ -149,12 +149,13 @@ class FontWall:
     Class that represents the wall of fonts
     """
 
-    def __init__(self, fonts, max_width=3000, max_height=2000):
+    def __init__(self, fonts, max_width=3306, max_height=1120, mode='horizontal'):
         """
         Object that represents the wall of fonts
         :param fonts: font list; string or FontPreview object
         :param max_width: The maximum possible width for the wall
         :param max_height: The maximum possible height for the wall
+        :param mode: image alignment, 'horizontal' or 'vertical'
         """
         # Check if list contains string or FontPreview object
         if isinstance(fonts, list):
@@ -172,8 +173,31 @@ class FontWall:
         self.bg_color = 'white'
         self.max_width = max_width
         self.max_height = max_height
+        self.mode = mode
         # Build the wall
         self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+
+    def __concatenate(self, img1, img2, position):
+        """
+        Link multiple images to form a layout inside the wall
+        :param img1: first image
+        :param img2: second image
+        :param position: paste positions
+        :return: None
+        """
+        # Compose the wall
+        if self.mode == 'horizontal':
+            dst = Image.new(self.color_system, (img1.image.width + img2.image.width, img1.image.height))
+            dst.paste(img1.image, (0, 0))
+            dst.paste(img2.image, (img1.image.width, 0))
+            self.wall.paste(dst, position)
+        elif self.mode == 'vertical':
+            dst = Image.new(self.color_system, (img1.image.width, img1.image.height + img2.image.height))
+            dst.paste(img1.image, (0, 0))
+            dst.paste(img2.image, (0, img1.image.height))
+            self.wall.paste(dst, position)
+        else:
+            raise ValueError("the mode can be 'horizontal' or 'vertical'")
 
 
 # endregion
