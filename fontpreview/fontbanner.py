@@ -149,12 +149,13 @@ class FontWall:
     Class that represents the wall of fonts
     """
 
-    def __init__(self, fonts, max_width=3306, max_height=1120, mode='horizontal'):
+    def __init__(self, fonts, max_width=3306, max_height=1120, max_tile=2, mode='horizontal'):
         """
         Object that represents the wall of fonts
+        :param max_tile: maximum tile per row
         :param fonts: font list; string or FontPreview object
-        :param max_width: The maximum possible width for the wall
-        :param max_height: The maximum possible height for the wall
+        :param max_width: maximum possible width for the wall
+        :param max_height: maximum possible height for the wall
         :param mode: image alignment, 'horizontal' or 'vertical'
         """
         # Check if list contains string or FontPreview object
@@ -174,8 +175,10 @@ class FontWall:
         self.max_width = max_width
         self.max_height = max_height
         self.mode = mode
+        self.max_tile = max_tile
         # Build the wall
         self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+        self.draw(self.max_tile)
 
     def __concatenate(self, img1, img2, position):
         """
@@ -183,7 +186,7 @@ class FontWall:
         :param img1: first image
         :param img2: second image
         :param position: paste positions
-        :return: None
+        :return: tuple
         """
         # Compose the wall
         if self.mode == 'horizontal':
@@ -198,6 +201,18 @@ class FontWall:
             self.wall.paste(dst, position)
         else:
             raise ValueError("the mode can be 'horizontal' or 'vertical'")
+        return dst.size
 
+    def draw(self, max_tile):
+        """
+        Draw wall with fonts on properties of this object
+        :param max_tile: maximum tile per row
+        :return: None
+        """
+        start_position = (0, 0)
+        for f in range(0, len(self.fonts), max_tile):
+            last_position = self.__concatenate(self.fonts[f], self.fonts[f + 1], start_position)
+            print(start_position)
+            start_position = (0, (start_position[1] + last_position[1]))
 
 # endregion
