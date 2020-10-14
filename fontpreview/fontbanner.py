@@ -152,7 +152,7 @@ class FontWall:
     def __init__(self, fonts, max_width=3306, max_height=1120, max_tile=2, mode='horizontal'):
         """
         Object that represents the wall of fonts
-        :param max_tile: maximum tile per row
+        :param max_tile: maximum tile per row/column
         :param fonts: font list; string or FontPreview object
         :param max_width: maximum possible width for the wall
         :param max_height: maximum possible height for the wall
@@ -180,27 +180,35 @@ class FontWall:
         self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
         self.draw(self.max_tile)
 
-    def __concatenate(self, img1, img2, position):
+    def __concatenate(self, fonts, position):
         """
         Link multiple images to form a layout inside the wall
-        :param img1: first image
-        :param img2: second image
+        :param fonts: list of FontPreview
         :param position: paste positions
         :return: tuple
         """
-        # Compose the wall
+        # Get max width and height, presume horizontal
         if self.mode == 'horizontal':
-            dst = Image.new(self.color_system, (img1.image.width + img2.image.width, img1.image.height))
-            dst.paste(img1.image, (0, 0))
-            dst.paste(img2.image, (img1.image.width, 0))
-            self.wall.paste(dst, position)
-        elif self.mode == 'vertical':
-            dst = Image.new(self.color_system, (img1.image.width, img1.image.height + img2.image.height))
-            dst.paste(img1.image, (0, 0))
-            dst.paste(img2.image, (0, img1.image.height))
-            self.wall.paste(dst, position)
+            max_width = sum([font.image.width for font in fonts])
+            max_height = max([font.image.height for font in fonts])
         else:
-            raise ValueError("the mode can be 'horizontal' or 'vertical'")
+            max_width = max([font.image.width for font in fonts])
+            max_height = sum([font.image.height for font in fonts])
+        # Create background
+        dst = Image.new(self.color_system, (max_width, max_height))
+        start = 0
+        for font in fonts:
+            # Compose the row
+            if self.mode == 'horizontal':
+                dst.paste(font.image, (start, 0))
+                start = font.image.width
+            # Compose the column
+            elif self.mode == 'vertical':
+                dst.paste(font.image, (0, start))
+                start = font.image.height
+            else:
+                raise ValueError("the mode can be 'horizontal' or 'vertical'")
+        self.wall.paste(dst, position)
         return dst.size
 
     def draw(self, max_tile):
