@@ -221,7 +221,6 @@ class FontWall:
         fonts = []
         for i in range(0, len(self.fonts), max_tile):
             fonts.append(self.fonts[i:i + max_tile])
-        print(fonts)
         # Calculate max_width and max_height of wall
         max_width = []
         max_height = []
@@ -238,7 +237,6 @@ class FontWall:
         else:
             self.max_width = sum(max_width)
             self.max_height = max(max_height)
-        print(self.max_width, self.max_height)
         self.wall = Image.new(self.color_system, (self.max_width, self.max_height), color=self.bg_color)
         # Build the wall
         start_position = (0, 0)
