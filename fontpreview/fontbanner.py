@@ -177,7 +177,7 @@ class FontWall:
         self.mode = mode
         self.max_tile = max_tile
         # Build the wall
-        self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+        self.wall = None
         self.draw(self.max_tile)
 
     def __concatenate(self, fonts, position):
@@ -201,11 +201,11 @@ class FontWall:
             # Compose the row
             if self.mode == 'horizontal':
                 dst.paste(font.image, (start, 0))
-                start = font.image.width
+                start = font.image.width + start
             # Compose the column
             elif self.mode == 'vertical':
                 dst.paste(font.image, (0, start))
-                start = font.image.height
+                start = font.image.height + start
             else:
                 raise ValueError("the mode can be 'horizontal' or 'vertical'")
         self.wall.paste(dst, position)
@@ -217,10 +217,37 @@ class FontWall:
         :param max_tile: maximum tile per row
         :return: None
         """
+        # Split fonts into maximum tile per row/column
+        fonts = []
+        for i in range(0, len(self.fonts), max_tile):
+            fonts.append(self.fonts[i:i + max_tile])
+        print(fonts)
+        # Calculate max_width and max_height of wall
+        max_width = []
+        max_height = []
+        for font in fonts:
+            if self.mode == 'horizontal':
+                max_width.append(sum([f.image.width for f in font]))
+                max_height.append(max([f.image.height for f in font]))
+            else:
+                max_width.append(max([f.image.width for f in font]))
+                max_height.append(sum([f.image.height for f in font]))
+        if self.mode == 'horizontal':
+            self.max_width = max(max_width)
+            self.max_height = sum(max_height)
+        else:
+            self.max_width = sum(max_width)
+            self.max_height = max(max_height)
+        print(self.max_width, self.max_height)
+        self.wall = Image.new(self.color_system, (self.max_width, self.max_height), color=self.bg_color)
+        # Build the wall
         start_position = (0, 0)
-        for f in range(0, len(self.fonts), max_tile):
-            last_position = self.__concatenate(self.fonts[f], self.fonts[f + 1], start_position)
-            print(start_position)
-            start_position = (0, (start_position[1] + last_position[1]))
+        for font in fonts:
+            if self.mode == 'horizontal':
+                last_position = self.__concatenate(font, start_position)
+                start_position = (0, (start_position[1] + last_position[1]))
+            else:
+                last_position = self.__concatenate(font, start_position)
+                start_position = ((start_position[0] + last_position[0]), 0)
 
 # endregion
