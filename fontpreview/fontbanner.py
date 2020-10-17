@@ -21,6 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region imports
+import os
 from .fontpreview import FontPreview, CALC_POSITION
 from PIL import Image
 
@@ -149,13 +150,11 @@ class FontWall:
     Class that represents the wall of fonts
     """
 
-    def __init__(self, fonts, max_width=3306, max_height=1120, max_tile=2, mode='horizontal'):
+    def __init__(self, fonts, max_tile=2, mode='horizontal'):
         """
         Object that represents the wall of fonts
-        :param max_tile: maximum tile per row/column
         :param fonts: font list; string or FontPreview object
-        :param max_width: maximum possible width for the wall
-        :param max_height: maximum possible height for the wall
+        :param max_tile: maximum tile per row/column
         :param mode: image alignment, 'horizontal' or 'vertical'
         """
         # Check if list contains string or FontPreview object
@@ -172,8 +171,8 @@ class FontWall:
         # Other properties
         self.color_system = 'RGB'
         self.bg_color = 'white'
-        self.max_width = max_width
-        self.max_height = max_height
+        self.max_width = None
+        self.max_height = None
         self.mode = mode
         self.max_tile = max_tile
         # Build the wall
@@ -247,5 +246,13 @@ class FontWall:
             else:
                 last_position = self.__concatenate(font, start_position)
                 start_position = ((start_position[0] + last_position[0]), 0)
+
+    def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontwall.png')):
+        """
+        Save the font wall
+        :param path: path where you want to save the font wall
+        :return: None
+        """
+        self.wall.save(path)
 
 # endregion
