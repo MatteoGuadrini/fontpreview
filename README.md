@@ -20,6 +20,18 @@ fb = FontBanner('noto.ttf', 'landscape', bg_color=(153, 153, 255), mode='fontnam
 fb.save('/tmp/fb.png')  # Light purple landscape backgroung with 'Noto' font name in black
 ```
 
+Font wall example:
+```python
+from fontpreview import FontBanner, FontWall
+
+fb = FontBanner('noto.ttf', 'landscape' , mode='fontname')
+fb2 = FontBanner('noto.ttf', 'landscape' , mode='alpha')
+fb3 = FontBanner('noto.ttf', 'landscape' , mode='letter')
+fb4 = FontBanner('noto.ttf', 'landscape' , mode='paragraph')
+fw = FontWall([fb,fb2,fb3,fb4])
+fw.save('/tmp/fw.png')  # White landscape backgroung with 'Noto' font name, letter and number, all letter and paragraph in black
+```
+
 ## Open source
 _fontpreview_ is a open source project. Any contribute, It's welcome.
 

@@ -21,6 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region imports
+import os
 from .fontpreview import FontPreview, CALC_POSITION
 from PIL import Image
 
@@ -149,12 +150,12 @@ class FontWall:
     Class that represents the wall of fonts
     """
 
-    def __init__(self, fonts, max_width=3000, max_height=2000):
+    def __init__(self, fonts, max_tile=2, mode='horizontal'):
         """
         Object that represents the wall of fonts
         :param fonts: font list; string or FontPreview object
-        :param max_width: The maximum possible width for the wall
-        :param max_height: The maximum possible height for the wall
+        :param max_tile: maximum tile per row/column
+        :param mode: image alignment, 'horizontal' or 'vertical'
         """
         # Check if list contains string or FontPreview object
         if isinstance(fonts, list):
@@ -170,10 +171,88 @@ class FontWall:
         # Other properties
         self.color_system = 'RGB'
         self.bg_color = 'white'
-        self.max_width = max_width
-        self.max_height = max_height
+        self.max_width = None
+        self.max_height = None
+        self.mode = mode
+        self.max_tile = max_tile
         # Build the wall
-        self.wall = Image.new(self.color_system, (max_width, max_height), color=self.bg_color)
+        self.wall = None
+        self.draw(self.max_tile)
 
+    def __concatenate(self, fonts, position):
+        """
+        Link multiple images to form a layout inside the wall
+        :param fonts: list of FontPreview
+        :param position: paste positions
+        :return: tuple
+        """
+        # Get max width and height, presume horizontal
+        if self.mode == 'horizontal':
+            max_width = sum([font.image.width for font in fonts])
+            max_height = max([font.image.height for font in fonts])
+        else:
+            max_width = max([font.image.width for font in fonts])
+            max_height = sum([font.image.height for font in fonts])
+        # Create background
+        dst = Image.new(self.color_system, (max_width, max_height))
+        start = 0
+        for font in fonts:
+            # Compose the row
+            if self.mode == 'horizontal':
+                dst.paste(font.image, (start, 0))
+                start = font.image.width + start
+            # Compose the column
+            elif self.mode == 'vertical':
+                dst.paste(font.image, (0, start))
+                start = font.image.height + start
+            else:
+                raise ValueError("the mode can be 'horizontal' or 'vertical'")
+        self.wall.paste(dst, position)
+        return dst.size
+
+    def draw(self, max_tile):
+        """
+        Draw wall with fonts on properties of this object
+        :param max_tile: maximum tile per row
+        :return: None
+        """
+        # Split fonts into maximum tile per row/column
+        fonts = []
+        for i in range(0, len(self.fonts), max_tile):
+            fonts.append(self.fonts[i:i + max_tile])
+        # Calculate max_width and max_height of wall
+        max_width = []
+        max_height = []
+        for font in fonts:
+            if self.mode == 'horizontal':
+                max_width.append(sum([f.image.width for f in font]))
+                max_height.append(max([f.image.height for f in font]))
+            else:
+                max_width.append(max([f.image.width for f in font]))
+                max_height.append(sum([f.image.height for f in font]))
+        if self.mode == 'horizontal':
+            self.max_width = max(max_width)
+            self.max_height = sum(max_height)
+        else:
+            self.max_width = sum(max_width)
+            self.max_height = max(max_height)
+        self.wall = Image.new(self.color_system, (self.max_width, self.max_height), color=self.bg_color)
+        # Build the wall
+        start_position = (0, 0)
+        for font in fonts:
+            if self.mode == 'horizontal':
+                last_position = self.__concatenate(font, start_position)
+                start_position = (0, (start_position[1] + last_position[1]))
+            else:
+                last_position = self.__concatenate(font, start_position)
+                start_position = ((start_position[0] + last_position[0]), 0)
+
+    def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontwall.png')):
+        """
+        Save the font wall
+        :param path: path where you want to save the font wall
+        :return: None
+        """
+        self.wall.save(path)
 
 # endregion
