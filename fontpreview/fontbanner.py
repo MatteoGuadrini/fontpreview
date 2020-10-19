@@ -179,6 +179,13 @@ class FontWall:
         self.wall = None
         self.draw(self.max_tile)
 
+    def __str__(self):
+        """
+        String representation of font wall
+        :return: string
+        """
+        return str(["tile{0}={1}".format(i, f) for i, f in enumerate(self.fonts)])
+
     def __concatenate(self, fonts, position):
         """
         Link multiple images to form a layout inside the wall
