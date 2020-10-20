@@ -77,6 +77,18 @@ class FontPreview:
             position=self.font_position, dimension=self.dimension
         )
 
+    def __resize(self):
+        """
+        Resize the font if it exceeds the size of the background
+        :return: None
+        """
+        # Check font size
+        text_size = self.font.getsize(self.font_text)
+        while text_size > self.dimension:
+            self.font_size = self.font_size - 2
+            self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
+            text_size = self.font.getsize(self.font_text)
+
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpreview.png')):
         """
         Save the preview font
@@ -109,6 +121,7 @@ class FontPreview:
         # Set size of font
         self.font_size = size
         self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
+        self.__resize()
         # Create default image
         self.draw()
 
