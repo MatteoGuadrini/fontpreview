@@ -21,6 +21,6 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from .fontpreview import FontPreview
-from .fontbanner import FontBanner, FontWall
+from .fontbanner import FontBanner, FontLogo, FontWall
 
 VERSION = '0.3.0'
