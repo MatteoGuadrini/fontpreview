@@ -145,6 +145,36 @@ class FontBanner(FontPreview):
         self.image.paste(img, position)
 
 
+class FontLogo(FontPreview):
+    """
+    Class that represents the logo of a font
+    """
+
+    def __init__(self, font, letters, size=(100, 100)):
+        """
+        Object that represents the logo of a font
+        :param font: font file
+        :param letters: One or two letters (or anything)
+        :param size: size of logo square. Default is (100, 100)
+        """
+        FontPreview.__init__(self, font=font)
+        # Check if the letters exceed the number 2
+        if len(letters) > 2:
+            raise ValueError('The letters can be up to 2')
+        else:
+            self.font_text = letters
+        # Check size
+        max_size = ((75, 75), (100, 100), (150, 150), (170, 170))
+        if size in max_size:
+            self.dimension = size
+        else:
+            raise ValueError('The max size of the logo can be this: (75, 75), (100, 100), (150, 150), (170, 170)')
+        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
+        # Built a logo font
+        self.draw()
+
+
+
 class FontWall:
     """
     Class that represents the wall of fonts
