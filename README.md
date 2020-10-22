@@ -20,6 +20,14 @@ fb = FontBanner('noto.ttf', 'landscape', bg_color=(153, 153, 255), mode='fontnam
 fb.save('/tmp/fb.png')  # Light purple landscape backgroung with 'Noto' font name in black
 ```
 
+Logo example:
+```python
+from fontpreview import FontLogo
+
+fl = FontLogo('noto.ttf', 'Fp')
+fl.save('/tmp/fl.png')  # White logo with 'Fp' letters 64pt in black
+```
+
 Font wall example:
 ```python
 from fontpreview import FontBanner, FontWall
