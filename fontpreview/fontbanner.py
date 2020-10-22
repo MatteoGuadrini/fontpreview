@@ -165,6 +165,7 @@ class FontLogo(FontPreview):
             self.font_text = letters
         # Check maximum size
         self.__max_size(size)
+        # Set letter position
         self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
         # Built a logo font
         self.draw()
@@ -180,6 +181,12 @@ class FontLogo(FontPreview):
             self.dimension = size
         else:
             raise ValueError('The max size of the logo can be this: (75, 75), (100, 100), (150, 150), (170, 170)')
+
+    def new_size(self, size):
+        # Check maximum size
+        self.__max_size(size)
+        # Built a logo font
+        self.draw()
 
 
 class FontWall:
