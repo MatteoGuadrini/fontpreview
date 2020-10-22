@@ -160,19 +160,26 @@ class FontLogo(FontPreview):
         FontPreview.__init__(self, font=font)
         # Check if the letters exceed the number 2
         if len(letters) > 2:
-            raise ValueError('The letters can be up to 2')
+            raise ValueError('letters can be maximum two')
         else:
             self.font_text = letters
-        # Check size
+        # Check maximum size
+        self.__max_size(size)
+        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
+        # Built a logo font
+        self.draw()
+
+    def __max_size(self, size):
+        """
+        Check maximum size
+        :param size: New size
+        :return: None
+        """
         max_size = ((75, 75), (100, 100), (150, 150), (170, 170))
         if size in max_size:
             self.dimension = size
         else:
             raise ValueError('The max size of the logo can be this: (75, 75), (100, 100), (150, 150), (170, 170)')
-        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
-        # Built a logo font
-        self.draw()
-
 
 
 class FontWall:
