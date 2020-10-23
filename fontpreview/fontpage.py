@@ -21,11 +21,32 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region Imports
+from .fontpreview import FontPreview, CALC_POSITION
+from .fontbanner import FontBanner, FontLogo
+from PIL import Image
 
 
 # endregion
 
 # region Classes
+class FontPage:
+    """
+    Class that represents the page of a font banners
+    """
 
+    def __init__(self, template=None, dimension=(2480, 3508)):
+        """
+        Object that represents the page of a font banners
+        :param template: template used to build the page
+        :param dimension: dimension of page. Default A4 in pixels.
+        """
+        self.logo = None
+        self.header = None
+        self.body = None
+        self.footer = None
+        self.template = template
+        self.dimension = dimension
+        self.color_system = 'RGB'
+        self.page = Image.new(self.color_system, self.dimension, color='white')
 
 # endregion
