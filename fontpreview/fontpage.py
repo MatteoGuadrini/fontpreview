@@ -3,7 +3,7 @@
 # vim: se ts=4 et syn=python:
 
 # created by: matteo.guadrini
-# __init__.py -- fontpreview
+# fontpage -- fontpreview
 #
 #     Copyright (C) 2020 Matteo Guadrini <matteo.guadrini@hotmail.it>
 #
@@ -20,7 +20,33 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .fontpreview import FontPreview
-from .fontbanner import FontBanner, FontLogo, FontWall
+# region Imports
+from .fontpreview import FontPreview, CALC_POSITION
+from .fontbanner import FontBanner, FontLogo
+from PIL import Image
 
-VERSION = '0.4.0'
+
+# endregion
+
+# region Classes
+class FontPage:
+    """
+    Class that represents the page of a font banners
+    """
+
+    def __init__(self, template=None, dimension=(2480, 3508)):
+        """
+        Object that represents the page of a font banners
+        :param template: template used to build the page
+        :param dimension: dimension of page. Default A4 in pixels.
+        """
+        self.logo = None
+        self.header = None
+        self.body = None
+        self.footer = None
+        self.template = template
+        self.dimension = dimension
+        self.color_system = 'RGB'
+        self.page = Image.new(self.color_system, self.dimension, color='white')
+
+# endregion

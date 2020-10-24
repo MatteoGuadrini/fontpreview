@@ -145,6 +145,50 @@ class FontBanner(FontPreview):
         self.image.paste(img, position)
 
 
+class FontLogo(FontPreview):
+    """
+    Class that represents the logo of a font
+    """
+
+    def __init__(self, font, letters, size=(100, 100)):
+        """
+        Object that represents the logo of a font
+        :param font: font file
+        :param letters: One or two letters (or anything)
+        :param size: size of logo square. Default is (100, 100)
+        """
+        FontPreview.__init__(self, font=font)
+        # Check if the letters exceed the number 2
+        if len(letters) > 2:
+            raise ValueError('letters can be maximum two')
+        else:
+            self.font_text = letters
+        # Check maximum size
+        self.__max_size(size)
+        # Set letter position
+        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
+        # Built a logo font
+        self.draw()
+
+    def __max_size(self, size):
+        """
+        Check maximum size
+        :param size: New size
+        :return: None
+        """
+        max_size = ((75, 75), (100, 100), (150, 150), (170, 170))
+        if size in max_size:
+            self.dimension = size
+        else:
+            raise ValueError('The max size of the logo can be this: (75, 75), (100, 100), (150, 150), (170, 170)')
+
+    def new_size(self, size):
+        # Check maximum size
+        self.__max_size(size)
+        # Built a logo font
+        self.draw()
+
+
 class FontWall:
     """
     Class that represents the wall of fonts
@@ -178,6 +222,13 @@ class FontWall:
         # Build the wall
         self.wall = None
         self.draw(self.max_tile)
+
+    def __str__(self):
+        """
+        String representation of font wall
+        :return: string
+        """
+        return str(["tile{0}={1}".format(i, f) for i, f in enumerate(self.fonts)])
 
     def __concatenate(self, fonts, position):
         """
