@@ -20,15 +20,15 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# region Imports
+# region imports
 from .fontpreview import FontPreview, CALC_POSITION
-from .fontbanner import FontBanner, FontLogo
+from .fontbanner import FontBanner, FontLogo, resize
 from PIL import Image
 
 
 # endregion
 
-# region Classes
+# region classes
 class FontPage:
     """
     Class that represents the page of a font banners
@@ -48,5 +48,22 @@ class FontPage:
         self.dimension = dimension
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
+
+    def set_header(self, header):
+        """
+        Set header of Font page
+        :param header: FontPreview object
+        :return: None
+        """
+        # Check if header is FontPreview object
+        if isinstance(header, FontPreview):
+            # Check width of header
+            if self.page.width != header.image.width:
+                header.dimension = (self.page.width, header.image.height)
+                header.font_position = CALC_POSITION['center'](header.dimension, header.font.getsize(header.font_text))
+                header.draw()
+            self.header = header
+        else:
+            raise ValueError('header must be FontPreview based object')
 
 # endregion
