@@ -61,8 +61,12 @@ class FontPage:
             if self.page.width != header.image.width:
                 header.dimension = (self.page.width, header.image.height)
                 header.font_position = CALC_POSITION['center'](header.dimension, header.font.getsize(header.font_text))
-                header.draw()
             self.header = header
+            # Check height of header
+            if header.image.height > self.page.height:
+                new_height = self.page.height // 6
+                header.dimension = (self.page.width, new_height)
+            header.draw()
         else:
             raise ValueError('header must be FontPreview based object')
 
