@@ -22,7 +22,7 @@
 
 # region imports
 from .fontpreview import FontPreview, CALC_POSITION
-from .fontbanner import FontBanner, FontLogo, resize
+from .fontbanner import FontLogo
 from PIL import Image
 
 
@@ -69,5 +69,26 @@ class FontPage:
             header.draw()
         else:
             raise ValueError('header must be FontPreview based object')
+
+    def set_logo(self, logo):
+        """
+        Set logo of Font page
+        :param logo: FontLogo object
+        :return: None
+        """
+        # Check if logo is FontLogo object
+        if isinstance(logo, FontLogo):
+            # Check if header exists
+            if self.header:
+                # Check size of header
+                if self.header.image.size < logo.image.size:
+                    logo.new_size((75, 75))
+                # Add logo on header
+                self.header.add_image(logo, CALC_POSITION['lcenter'](self.header.dimension,
+                                                                     self.header.font.getsize(self.header.font_text)))
+            else:
+                raise AttributeError('header attribute is None')
+        else:
+            raise ValueError('logo must be FontLogo object')
 
 # endregion
