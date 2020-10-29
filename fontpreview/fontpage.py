@@ -91,4 +91,25 @@ class FontPage:
         else:
             raise ValueError('logo must be FontLogo object')
 
+    def set_body(self, body):
+        """
+        Set body of Font page
+        :param body: FontPreview object
+        :return: None
+        """
+        # Check if body is FontPreview object
+        if isinstance(body, FontPreview):
+            # Check width of body
+            if self.page.width != body.image.width:
+                body.dimension = (self.page.width, body.image.height)
+                body.font_position = CALC_POSITION['center'](body.dimension, body.font.getsize(body.font_text))
+            self.body = body
+            # Check height of body
+            if body.image.height > self.page.height:
+                new_height = self.page.height // 3
+                body.dimension = (self.page.width, new_height)
+            body.draw()
+        else:
+            raise ValueError('body must be FontPreview based object')
+
 # endregion
