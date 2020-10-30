@@ -112,4 +112,25 @@ class FontPage:
         else:
             raise ValueError('body must be FontPreview based object')
 
+    def set_footer(self, footer):
+        """
+        Set footer of Font page
+        :param footer: FontPreview object
+        :return: None
+        """
+        # Check if footer is FontPreview object
+        if isinstance(footer, FontPreview):
+            # Check width of footer
+            if self.page.width != footer.image.width:
+                footer.dimension = (self.page.width, footer.image.height)
+                footer.font_position = CALC_POSITION['center'](footer.dimension, footer.font.getsize(footer.font_text))
+            self.footer = footer
+            # Check height of footer
+            if footer.image.height > self.page.height:
+                new_height = self.page.height // 4
+                footer.dimension = (self.page.width, new_height)
+            footer.draw()
+        else:
+            raise ValueError('body must be FontPreview based object')
+
 # endregion
