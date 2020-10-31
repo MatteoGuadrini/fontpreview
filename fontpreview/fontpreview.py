@@ -28,13 +28,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 # region variable
 CALC_POSITION = {
-    'center': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, (ixy[1] - fxy[1]) / 2),
-    'top': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, 0),
-    'below': lambda ixy, fxy: ((ixy[0] - fxy[0]) / 2, (ixy[1] - fxy[1])),
-    'rcenter': lambda ixy, fxy: ((ixy[0] - fxy[0]), (ixy[1] - fxy[1]) / 2),
+    'center': lambda ixy, fxy: ((ixy[0] - fxy[0]) // 2, (ixy[1] - fxy[1]) // 2),
+    'top': lambda ixy, fxy: ((ixy[0] - fxy[0]) // 2, 0),
+    'below': lambda ixy, fxy: ((ixy[0] - fxy[0]) // 2, (ixy[1] - fxy[1])),
+    'rcenter': lambda ixy, fxy: ((ixy[0] - fxy[0]), (ixy[1] - fxy[1]) // 2),
     'rtop': lambda ixy, fxy: ((ixy[0] - fxy[0]), 0),
     'rbelow': lambda ixy, fxy: ((ixy[0] - fxy[0]), (ixy[1] - fxy[1])),
-    'lcenter': lambda ixy, fxy: (0, (ixy[1] - fxy[1]) / 2),
+    'lcenter': lambda ixy, fxy: (0, (ixy[1] - fxy[1]) // 2),
     'ltop': lambda ixy, fxy: (0, 0),
     'lbelow': lambda ixy, fxy: (0, (ixy[1] - fxy[1])),
 }
