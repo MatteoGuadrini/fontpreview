@@ -21,6 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region imports
+import os
 from .fontpreview import FontPreview, CALC_POSITION
 from .fontbanner import FontLogo
 from PIL import Image, ImageDraw
@@ -178,5 +179,13 @@ class FontPage:
             # Body/Footer line
             footer_finish = (self.page.width, self.body.image.height + self.header.image.height)
             draw.line([footer_start, footer_finish], fill=sep_color, width=sep_width)
+
+    def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpage.png')):
+        """
+        Save the font page
+        :param path: path where you want to save the font page
+        :return: None
+        """
+        self.page.save(path)
 
 # endregion
