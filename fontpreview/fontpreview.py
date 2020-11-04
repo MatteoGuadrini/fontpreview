@@ -132,11 +132,13 @@ class FontPreview:
         The strings available are 'center', 'top', 'below', 'rcenter', 'rtop', 'rbelow', 'lcenter', 'ltop' and 'lbelow'.
         :return: None
         """
+        # Create image drawer
+        img = ImageDraw.Draw(self.image)
         if isinstance(position, tuple):
             self.font_position = position
         else:
             self.font_position = CALC_POSITION.get(position, CALC_POSITION['center'])(
-                self.dimension, self.font.getsize(self.font_text)
+                self.dimension, img.multiline_textsize(self.font_text, self.font)
             )
         # Create default image
         self.draw()
