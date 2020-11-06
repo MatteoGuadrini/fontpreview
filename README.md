@@ -4,41 +4,74 @@
 
 This is a library that allows you to create preview images from one or more selected fonts.
 
-Simple example:
+## Simple usage
+
+Preview example:
 ```python
 from fontpreview import FontPreview
 
-fp = FontPreview('noto.ttf')
-fp.save('/tmp/fp.png')  # White backgroung with 'a b c d e f' letters 64pt in black
+fp = FontPreview('/tmp/noto.ttf')
+fp.save('/tmp/fp.png')
 ```
+<img src="https://i.ibb.co/258dCPZ/fp.png" alt="FontPreview object" width="350" height="150">
+<br><br>
 
 Banner example:
 ```python
 from fontpreview import FontBanner
 
-fb = FontBanner('noto.ttf', 'landscape', bg_color=(153, 153, 255), mode='fontname')
-fb.save('/tmp/fb.png')  # Light purple landscape backgroung with 'Noto' font name in black
+fb = FontBanner('/tmp/noto.ttf', 'landscape', bg_color=(153, 153, 255), mode='fontname')
+fb.save('/tmp/fb.png')
 ```
+<img src="https://i.ibb.co/FVWdkYC/fb.png" alt="FontBanner object" width="350" height="130">
+<br><br>
 
 Logo example:
 ```python
 from fontpreview import FontLogo
 
-fl = FontLogo('noto.ttf', 'Fp')
-fl.save('/tmp/fl.png')  # White logo with 'Fp' letters 64pt in black
+fl = FontLogo('/tmp/noto.ttf', 'Fp')
+fl.save('/tmp/fl.png')
 ```
+<img src="https://i.ibb.co/j302Y5k/fl.png" alt="FontLogo object">
+<br><br>
 
 Font wall example:
 ```python
 from fontpreview import FontBanner, FontWall
 
-fb = FontBanner('noto.ttf', 'landscape' , mode='fontname')
-fb2 = FontBanner('noto.ttf', 'landscape' , mode='alpha')
-fb3 = FontBanner('noto.ttf', 'landscape' , mode='letter')
-fb4 = FontBanner('noto.ttf', 'landscape' , mode='paragraph')
+# Define the various parts of wall
+fb = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+fb2 = FontBanner('/tmp/noto.ttf', 'landscape' , mode='alpha')
+fb3 = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+fb4 = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
 fw = FontWall([fb,fb2,fb3,fb4])
-fw.save('/tmp/fw.png')  # White landscape backgroung with 'Noto' font name, letter and number, all letter and paragraph in black
+fw.save('/tmp/fw.png')
 ```
+<img src="https://i.ibb.co/cDBST2r/fw.png" alt="FontWall object" width="650" height="200">
+<br><br>
+
+
+Font page example:
+```python
+from fontpreview import FontPage, FontBanner
+
+# Define the various parts of wall
+header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
+footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+# Create FontPage object
+fpage = FontPage()
+fpage.set_header(header)
+fpage.set_body(body)
+fpage.set_footer(footer)
+# Design all parts
+fpage.draw()
+fpage.save('/tmp/fpage.png')
+
+```
+<img src="https://i.ibb.co/LgFLnXk/fpage.png" alt="FontWall object" width="650" height="850">
+<br><br>
 
 ## Open source
 _fontpreview_ is a open source project. Any contribute, It's welcome.
@@ -65,6 +98,8 @@ Come today, we are organized to dare to listen to them and answers, every day of
 ## Acknowledgments
 
 Thanks to Mark Lutz for writing the _Learning Python_ and _Programming Python_ books that make up my python foundation.
+
+Thanks to Kenneth Reitz and Tanya Schlusser for writing the _The Hitchhiker’s Guide to Python_ books.
 
 Special thanks go to my wife, who understood the hours of absence for this development. 
 Thanks to my children, for the daily inspiration they give me and to make me realize, that life must be simple.
