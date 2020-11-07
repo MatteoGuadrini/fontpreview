@@ -21,9 +21,10 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # region imports
+import os
 from .fontpreview import FontPreview, CALC_POSITION
 from .fontbanner import FontLogo
-from PIL import Image
+from PIL import Image, ImageDraw
 
 
 # endregion
@@ -49,6 +50,41 @@ class FontPage:
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
 
+    def __compose(self):
+        """
+        Dynamically compose the page
+        :return: None
+        """
+        # Check if the template is specified
+        if self.template:
+            pass
+        else:
+            # Define font position for each part
+            text_position = 'center'
+            # Define font size for each part
+            header_font_size = 120
+            body_font_size = 140
+            footer_font_size = 120
+            # Divide the size into six equal parts
+            unit = self.page.height // 6
+            # I define the units for each part of the page
+            header_units = unit
+            body_units = unit * 3
+            footer_units = unit * 2
+            # Check height of each part
+            if self.header.image.height != header_units:
+                self.header.dimension = (self.page.width, header_units)
+                self.header.set_font_size(header_font_size)
+                self.header.set_text_position(text_position)
+            if self.body.image.height != body_units:
+                self.body.dimension = (self.page.width, body_units)
+                self.body.set_font_size(body_font_size)
+                self.body.set_text_position(text_position)
+            if self.footer.image.height != footer_units:
+                self.footer.dimension = (self.page.width, footer_units)
+                self.footer.set_font_size(footer_font_size)
+                self.footer.set_text_position(text_position)
+
     def set_header(self, header):
         """
         Set header of Font page
@@ -60,13 +96,8 @@ class FontPage:
             # Check width of header
             if self.page.width != header.image.width:
                 header.dimension = (self.page.width, header.image.height)
-                header.font_position = CALC_POSITION['center'](header.dimension, header.font.getsize(header.font_text))
+                header.draw()
             self.header = header
-            # Check height of header
-            if header.image.height > self.page.height:
-                new_height = self.page.height // 6
-                header.dimension = (self.page.width, new_height)
-            header.draw()
         else:
             raise ValueError('header must be FontPreview based object')
 
@@ -102,13 +133,8 @@ class FontPage:
             # Check width of body
             if self.page.width != body.image.width:
                 body.dimension = (self.page.width, body.image.height)
-                body.font_position = CALC_POSITION['center'](body.dimension, body.font.getsize(body.font_text))
+                body.draw()
             self.body = body
-            # Check height of body
-            if body.image.height > self.page.height:
-                new_height = self.page.height // 3
-                body.dimension = (self.page.width, new_height)
-            body.draw()
         else:
             raise ValueError('body must be FontPreview based object')
 
@@ -123,14 +149,43 @@ class FontPage:
             # Check width of footer
             if self.page.width != footer.image.width:
                 footer.dimension = (self.page.width, footer.image.height)
-                footer.font_position = CALC_POSITION['center'](footer.dimension, footer.font.getsize(footer.font_text))
+                footer.draw()
             self.footer = footer
-            # Check height of footer
-            if footer.image.height > self.page.height:
-                new_height = self.page.height // 4
-                footer.dimension = (self.page.width, new_height)
-            footer.draw()
         else:
-            raise ValueError('body must be FontPreview based object')
+            raise ValueError('footer must be FontPreview based object')
+
+    def draw(self, separator=True, sep_color='black', sep_width=5):
+        """
+        Draw font page with header, logo, body and footer
+        :param separator: line that separates the parts
+        :param sep_color: separator color
+        :param sep_width: separator width
+        :return: None
+        """
+        # Compose all parts
+        self.__compose()
+        header_start = (0, 0)
+        self.page.paste(self.header.image, header_start)
+        body_start = (0, self.header.image.height)
+        self.page.paste(self.body.image, body_start)
+        footer_start = (0, (self.body.image.height + self.header.image.height))
+        self.page.paste(self.footer.image, footer_start)
+        # Draw line
+        if separator:
+            draw = ImageDraw.Draw(self.page)
+            # Header/Body line
+            body_finish = (self.page.width, self.header.image.height)
+            draw.line([body_start, body_finish], fill=sep_color, width=sep_width)
+            # Body/Footer line
+            footer_finish = (self.page.width, self.body.image.height + self.header.image.height)
+            draw.line([footer_start, footer_finish], fill=sep_color, width=sep_width)
+
+    def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpage.png')):
+        """
+        Save the font page
+        :param path: path where you want to save the font page
+        :return: None
+        """
+        self.page.save(path)
 
 # endregion

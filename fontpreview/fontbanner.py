@@ -22,7 +22,7 @@
 
 # region imports
 import os
-from .fontpreview import FontPreview, CALC_POSITION
+from .fontpreview import FontPreview
 from PIL import Image
 
 
@@ -63,7 +63,7 @@ class FontBanner(FontPreview):
         self.bg_color = bg_color
         self.fg_color = fg_color
         self.mode = mode
-        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
+        self.set_text_position('center')
         # Create default image
         self.set_mode(mode=mode)
 
@@ -166,7 +166,7 @@ class FontLogo(FontPreview):
         # Check maximum size
         self.__max_size(size)
         # Set letter position
-        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
+        self.set_text_position('center')
         # Built a logo font
         self.draw()
 
