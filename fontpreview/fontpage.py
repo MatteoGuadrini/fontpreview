@@ -188,4 +188,32 @@ class FontPage:
         """
         self.page.save(path)
 
+
+class FontPageTemplate:
+    """
+    Class representing the template of a FontPage object
+    """
+
+    def __init__(self, page_height, units_number=6):
+        """
+        Object representing the template of a FontPage object
+        :param page_height: height of FontPage object
+        :param units_number: division number to create the units
+        """
+        # Calculate units
+        self.unit = page_height // units_number
+        # header
+        self.header_font_size = 120
+        self.header_units = self.unit
+        self.header_text_position = 'center'
+        # body
+        self.body_font_size = 140
+        self.body_units = self.unit * 3
+        self.body_text_position = 'center'
+        # footer
+        self.footer_font_size = 120
+        self.footer_units = self.unit * 2
+        self.footer_text_position = 'center'
+
+
 # endregion
