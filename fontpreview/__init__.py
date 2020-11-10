@@ -22,6 +22,6 @@
 
 from .fontpreview import FontPreview
 from .fontbanner import FontBanner, FontLogo, FontWall
-from .fontpage import FontPage
+from .fontpage import FontPage, FontPageTemplate
 
 VERSION = '0.6.0'
