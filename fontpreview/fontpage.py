@@ -215,5 +215,18 @@ class FontPageTemplate:
         self.footer_units = self.unit * 2
         self.footer_text_position = 'center'
 
+    def set_header(self, font_size, units, text_position):
+        """
+        Setting the header properties
+        :param font_size: the header font size
+        :param units: the header units number
+        :param text_position: the header text position
+        :return: None
+        """
+        # header
+        self.header_font_size = font_size
+        self.header_units = self.unit * units
+        self.header_text_position = text_position
+
 
 # endregion
