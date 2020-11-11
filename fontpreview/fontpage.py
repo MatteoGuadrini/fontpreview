@@ -201,7 +201,8 @@ class FontPageTemplate:
         :param units_number: division number to create the units
         """
         # Calculate units
-        self.unit = page_height // units_number
+        self.page_height = page_height
+        self.unit = self.page_height // units_number
         # header
         self.header_font_size = 120
         self.header_units = self.unit
