@@ -228,5 +228,18 @@ class FontPageTemplate:
         self.header_units = self.unit * units
         self.header_text_position = text_position
 
+    def set_body(self, font_size, units, text_position):
+        """
+        Setting the body properties
+        :param font_size: the body font size
+        :param units: the body units number
+        :param text_position: the body text position
+        :return: None
+        """
+        # header
+        self.body_font_size = font_size
+        self.body_units = self.unit * units
+        self.body_text_position = text_position
+
 
 # endregion
