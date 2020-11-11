@@ -241,5 +241,18 @@ class FontPageTemplate:
         self.body_units = self.unit * units
         self.body_text_position = text_position
 
+    def set_footer(self, font_size, units, text_position):
+        """
+        Setting the footer properties
+        :param font_size: the footer font size
+        :param units: the footer units number
+        :param text_position: the footer text position
+        :return: None
+        """
+        # header
+        self.footer_font_size = font_size
+        self.footer_units = self.unit * units
+        self.footer_text_position = text_position
+
 
 # endregion
