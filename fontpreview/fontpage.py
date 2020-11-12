@@ -216,6 +216,16 @@ class FontPageTemplate:
         self.footer_units = self.unit * 2
         self.footer_text_position = 'center'
 
+    def __check_units(self):
+        """
+        Check the overrun of the units
+        :return: None
+        """
+        total_units = self.header_units + self.body_units + self.footer_units
+        # Check if total units overrun maximum height
+        if total_units > self.page_height:
+            raise ValueError('The height of the units exceed the maximum allowed: {0}'.format(self.page_height))
+
     def set_header(self, font_size, units, text_position):
         """
         Setting the header properties
@@ -228,6 +238,7 @@ class FontPageTemplate:
         self.header_font_size = font_size
         self.header_units = self.unit * units
         self.header_text_position = text_position
+        self.__check_units()
 
     def set_body(self, font_size, units, text_position):
         """
@@ -241,6 +252,7 @@ class FontPageTemplate:
         self.body_font_size = font_size
         self.body_units = self.unit * units
         self.body_text_position = text_position
+        self.__check_units()
 
     def set_footer(self, font_size, units, text_position):
         """
@@ -254,6 +266,7 @@ class FontPageTemplate:
         self.footer_font_size = font_size
         self.footer_units = self.unit * units
         self.footer_text_position = text_position
+        self.__check_units()
 
 
 # endregion
