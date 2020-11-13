@@ -82,12 +82,13 @@ class FontPreview:
         Resize the font if it exceeds the size of the background
         :return: None
         """
+        img = ImageDraw.Draw(self.image)
         # Check font size
-        text_size = self.font.getsize(self.font_text)
+        text_size = img.multiline_textsize(self.font_text, self.font)
         while text_size > self.dimension:
             self.font_size = self.font_size - 2
             self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
-            text_size = self.font.getsize(self.font_text)
+            text_size = img.multiline_textsize(self.font_text, self.font)
 
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpreview.png')):
         """
