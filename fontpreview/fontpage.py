@@ -46,7 +46,10 @@ class FontPage:
         self.body = None
         self.footer = None
         self.template = template
-        self.dimension = dimension
+        if self.template:
+            self.dimension = (dimension[0], self.template.page_height)
+        else:
+            self.dimension = dimension
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
 
@@ -181,10 +184,10 @@ class FontPageTemplate:
     Class representing the template of a FontPage object
     """
 
-    def __init__(self, page_height, units_number=6):
+    def __init__(self, page_height=3508, units_number=6):
         """
         Object representing the template of a FontPage object
-        :param page_height: height of FontPage object
+        :param page_height: height of FontPage object. Default is 3508.
         :param units_number: division number to create the units
         """
         # Calculate units
