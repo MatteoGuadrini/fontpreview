@@ -73,6 +73,31 @@ fpage.save('/tmp/fpage.png')
 <img src="https://i.ibb.co/LgFLnXk/fpage.png" alt="FontWall object" width="650" height="850">
 <br><br>
 
+Font page with template example:
+```python
+from fontpreview import FontPage, FontPageTemplate, FontBanner
+
+# Define the various parts of wall
+header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
+footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+# Create font page template
+template = FontPageTemplate(3508)
+template.set_body(170, 1, 'lcenter')
+template.set_footer(100, 4, 'lcenter')
+# Create FontPage object
+fpage = FontPage(template=template)
+fpage.set_header(header)
+fpage.set_body(body)
+fpage.set_footer(footer)
+# Design all parts
+fpage.draw()
+fpage.save('/tmp/fpage_template.png')
+
+```
+<img src="https://i.ibb.co/qJjMGpr/fpage-template.png" alt="FontWall object" width="650" height="850">
+<br><br>
+
 ## Open source
 _fontpreview_ is a open source project. Any contribute, It's welcome.
 
