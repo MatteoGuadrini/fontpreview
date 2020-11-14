@@ -46,7 +46,10 @@ class FontPage:
         self.body = None
         self.footer = None
         self.template = template
-        self.dimension = dimension
+        if self.template:
+            self.dimension = (dimension[0], self.template.page_height)
+        else:
+            self.dimension = dimension
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
 
@@ -56,34 +59,21 @@ class FontPage:
         :return: None
         """
         # Check if the template is specified
-        if self.template:
-            pass
-        else:
-            # Define font position for each part
-            text_position = 'center'
-            # Define font size for each part
-            header_font_size = 120
-            body_font_size = 140
-            footer_font_size = 120
-            # Divide the size into six equal parts
-            unit = self.page.height // 6
-            # I define the units for each part of the page
-            header_units = unit
-            body_units = unit * 3
-            footer_units = unit * 2
-            # Check height of each part
-            if self.header.image.height != header_units:
-                self.header.dimension = (self.page.width, header_units)
-                self.header.set_font_size(header_font_size)
-                self.header.set_text_position(text_position)
-            if self.body.image.height != body_units:
-                self.body.dimension = (self.page.width, body_units)
-                self.body.set_font_size(body_font_size)
-                self.body.set_text_position(text_position)
-            if self.footer.image.height != footer_units:
-                self.footer.dimension = (self.page.width, footer_units)
-                self.footer.set_font_size(footer_font_size)
-                self.footer.set_text_position(text_position)
+        if not self.template:
+            self.template = FontPageTemplate(self.dimension[1])
+        # Check height of each part
+        if self.header.image.height != self.template.header_units:
+            self.header.dimension = (self.page.width, self.template.header_units)
+            self.header.set_font_size(self.template.header_font_size)
+            self.header.set_text_position(self.template.header_text_position)
+        if self.body.image.height != self.template.body_units:
+            self.body.dimension = (self.page.width, self.template.body_units)
+            self.body.set_font_size(self.template.body_font_size)
+            self.body.set_text_position(self.template.body_text_position)
+        if self.footer.image.height != self.template.footer_units:
+            self.footer.dimension = (self.page.width, self.template.footer_units)
+            self.footer.set_font_size(self.template.footer_font_size)
+            self.footer.set_text_position(self.template.footer_text_position)
 
     def set_header(self, header):
         """
@@ -187,5 +177,99 @@ class FontPage:
         :return: None
         """
         self.page.save(path)
+
+
+class FontPageTemplate:
+    """
+    Class representing the template of a FontPage object
+    """
+
+    def __init__(self, page_height=3508, units_number=6):
+        """
+        Object representing the template of a FontPage object
+        :param page_height: height of FontPage object. Default is 3508.
+        :param units_number: division number to create the units
+        """
+        # Calculate units
+        self.page_height = page_height
+        self.unit = self.page_height // units_number
+        # header
+        self.header_font_size = 120
+        self.header_units = self.unit
+        self.header_text_position = 'center'
+        # body
+        self.body_font_size = 140
+        self.body_units = self.unit * 3
+        self.body_text_position = 'center'
+        # footer
+        self.footer_font_size = 120
+        self.footer_units = self.unit * 2
+        self.footer_text_position = 'center'
+
+    def __check_units(self, context, unit):
+        """
+        Check the overrun of the units
+        :param context: context is part of page; header, body or footer
+        :param unit: height of unit
+        :return: None
+        """
+        # Check context
+        if context == 'header':
+            total_units = unit + self.body_units + self.footer_units
+        elif context == 'body':
+            total_units = self.header_units + unit + self.footer_units
+        elif context == 'footer':
+            total_units = self.header_units + self.body_units + unit
+        else:
+            raise ValueError('context must be "header","body" or "footer"')
+        # Check if total units overrun maximum height
+        if total_units > self.page_height:
+            raise ValueError('The height of the units exceed the maximum allowed: {0}'.format(self.page_height))
+
+    def set_header(self, font_size, units, text_position):
+        """
+        Setting the header properties
+        :param font_size: the header font size
+        :param units: the header units number
+        :param text_position: the header text position
+        :return: None
+        """
+        # header
+        self.header_font_size = font_size
+        unit = self.unit * units
+        self.__check_units('header', unit)
+        self.header_units = unit
+        self.header_text_position = text_position
+
+    def set_body(self, font_size, units, text_position):
+        """
+        Setting the body properties
+        :param font_size: the body font size
+        :param units: the body units number
+        :param text_position: the body text position
+        :return: None
+        """
+        # header
+        self.body_font_size = font_size
+        unit = self.unit * units
+        self.__check_units('body', unit)
+        self.body_units = unit
+        self.body_text_position = text_position
+
+    def set_footer(self, font_size, units, text_position):
+        """
+        Setting the footer properties
+        :param font_size: the footer font size
+        :param units: the footer units number
+        :param text_position: the footer text position
+        :return: None
+        """
+        # header
+        self.footer_font_size = font_size
+        unit = self.unit * units
+        self.__check_units('footer', unit)
+        self.footer_units = unit
+        self.footer_text_position = text_position
+
 
 # endregion
