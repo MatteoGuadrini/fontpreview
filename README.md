@@ -70,7 +70,7 @@ fpage.draw()
 fpage.save('/tmp/fpage.png')
 
 ```
-<img src="https://i.ibb.co/LgFLnXk/fpage.png" alt="FontWall object" width="650" height="850">
+<img src="https://i.ibb.co/LgFLnXk/fpage.png" alt="FontPage object" width="650" height="850">
 <br><br>
 
 Font page with template example:
@@ -95,7 +95,69 @@ fpage.draw()
 fpage.save('/tmp/fpage_template.png')
 
 ```
-<img src="https://i.ibb.co/qJjMGpr/fpage-template.png" alt="FontWall object" width="650" height="850">
+<img src="https://i.ibb.co/qJjMGpr/fpage-template.png" alt="FontPage with template object" width="650" height="850">
+<br><br>
+
+## Advanced usage
+
+Below is an example of various previews of the _"Fira Code regular"_ font. 
+Does it remind you of anything? [Fira code original](https://github.com/tonsky/FiraCode/raw/master/extras/logo.svg)
+```python
+# FIRA CODE WALL
+from fontpreview import FontBanner, FontWall
+fira_code = '/tmp/firacode.ttf'
+# RGB group = ('background', 'FIRA COD color', 'Ligature color', 'E color background')
+colors_group = [
+                ('black', (0, 143, 0), (0, 236, 236), (255, 0, 255)),
+                ('black', (166, 47, 123), (81, 208, 93), (11, 179, 248)),
+                ((13, 21, 43), (112, 204, 84), (226, 110, 34), (223, 245, 90)),
+                ((43, 6, 42), (136, 126, 135), (4, 150, 153), (147, 103, 145)),
+                ((39, 57, 85), (255, 241, 208), (208, 84, 0), (209, 215, 227)),
+                ((31, 63, 89), (248, 248, 242), (230, 219, 117), (166, 226, 51)),
+                ((1, 47, 80), (224, 202, 52), (73, 217, 38), (255, 125, 158)),
+                ((0, 0, 170), (75, 224, 245), (255, 255, 85), (0, 170, 170)),
+                ('white', 'black', 'black', 'black'),
+                ((247, 247, 247), (167, 29, 93), (121, 93, 163), (0, 134, 179)),
+                ((239, 240, 243), (15, 131, 207), (208, 84, 0), (105, 40, 122)),
+                ((239, 231, 212), (218, 116, 53), (0, 142, 212), (186, 136, 0)),
+                ((39, 40, 34), (132, 214, 45), (249, 39, 114), (174, 129, 255)),
+                ((43, 48, 59), (180, 142, 173), (143, 161, 179), (152, 190, 140)),
+                ((32, 32, 32), (171, 130, 84), (160, 171, 127), (216, 127, 98)),
+                ((0, 43, 54), (0, 160, 153), (126, 143, 3), (218, 66, 130))
+                ]
+banners = []
+# Create banners
+for colors in colors_group:
+    # Create a FontBanner objects
+    fb = FontBanner(fira_code, (413, 240))
+    liga = FontBanner(fira_code, (413, 240))
+    E = FontBanner(fira_code, (40, 70))
+    # Set background colors
+    fb.bg_color = liga.bg_color = colors[0]
+    E.bg_color = colors[3]
+    # Set foreground colors
+    fb.fg_color = colors[1]
+    liga.fg_color = colors[2]
+    E.fg_color = colors[0]
+    # Set text
+    fb.font_text = 'FIRA COD'
+    liga.font_text = "!=->>++:="
+    E.font_text = 'E'
+    # Set text position
+    E.set_text_position('ltop')
+    fb.set_text_position((25, 60))
+    liga.set_text_position('top')
+    # Adding image on fb
+    fb.add_image(liga, (0, 122))
+    fb.add_image(E, (339, 60))
+    # Add to list of banners
+    banners.append(fb)
+
+# Create a wall
+fw = FontWall(banners, max_tile=4)
+fw.save('/tmp/fira_code.png')
+```
+<img src="https://i.ibb.co/cvnPRdB/fira-code.png" alt="Fira code wall">
 <br><br>
 
 ## Open source
