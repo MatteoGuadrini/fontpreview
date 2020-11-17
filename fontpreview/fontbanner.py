@@ -32,6 +32,7 @@ from PIL import Image
 def resize(image, size):
     """
     Resize image
+
     :param image: image to resize
     :param size: new size of image
     :return: Image
@@ -51,6 +52,7 @@ class FontBanner(FontPreview):
     def __init__(self, font, orientation='landscape', bg_color='white', fg_color='black', mode='letter'):
         """
         Object that represents the banner of a font
+
         :param font: font file
         :param orientation: the orientation of the banner; 'landscape', 'portrait' or tuple(x,y)
         :param bg_color: background color
@@ -70,6 +72,7 @@ class FontBanner(FontPreview):
     def __str__(self):
         """
         String representation of font banner
+
         :return: string
         """
         return FontPreview.__str__(self) + ",mode={mode}".format(mode=self.mode)
@@ -77,6 +80,7 @@ class FontBanner(FontPreview):
     def set_orientation(self, orientation, font_position='center'):
         """
         Set orientation of banner
+
         :param orientation: the orientation of the banner; 'landscape' or 'portrait'
         :param font_position: font position respect dimension of banner
         :return: None
@@ -102,6 +106,7 @@ class FontBanner(FontPreview):
     def set_mode(self, mode, align='center'):
         """
         Set the text mode
+
         :param mode: mode that sets the text in the banner
         :param align: alignment of text. Available 'left', 'center' and 'right'
         :return: None
@@ -128,6 +133,7 @@ class FontBanner(FontPreview):
     def add_image(self, image, position):
         """
         Adds an additional image to the banner
+
         :param image: path of image
         :param position: position of image
         :return: None
@@ -153,6 +159,7 @@ class FontLogo(FontPreview):
     def __init__(self, font, letters, size=(100, 100)):
         """
         Object that represents the logo of a font
+
         :param font: font file
         :param letters: One or two letters (or anything)
         :param size: size of logo square. Default is (100, 100)
@@ -173,6 +180,7 @@ class FontLogo(FontPreview):
     def __max_size(self, size):
         """
         Check maximum size
+
         :param size: New size
         :return: None
         """
@@ -183,6 +191,12 @@ class FontLogo(FontPreview):
             raise ValueError('The max size of the logo can be this: (75, 75), (100, 100), (150, 150), (170, 170)')
 
     def new_size(self, size):
+        """
+        Define new size of FontLogo object
+
+        :param size: size of fontlogo object
+        :return: None
+        """
         # Check maximum size
         self.__max_size(size)
         # Built a logo font
@@ -197,6 +211,7 @@ class FontWall:
     def __init__(self, fonts, max_tile=2, mode='horizontal'):
         """
         Object that represents the wall of fonts
+
         :param fonts: font list; string or FontPreview object
         :param max_tile: maximum tile per row/column
         :param mode: image alignment, 'horizontal' or 'vertical'
@@ -226,6 +241,7 @@ class FontWall:
     def __str__(self):
         """
         String representation of font wall
+
         :return: string
         """
         return str(["tile{0}={1}".format(i, f) for i, f in enumerate(self.fonts)])
@@ -233,6 +249,7 @@ class FontWall:
     def __concatenate(self, fonts, position):
         """
         Link multiple images to form a layout inside the wall
+
         :param fonts: list of FontPreview
         :param position: paste positions
         :return: tuple
@@ -264,6 +281,7 @@ class FontWall:
     def draw(self, max_tile):
         """
         Draw wall with fonts on properties of this object
+
         :param max_tile: maximum tile per row
         :return: None
         """
@@ -301,6 +319,7 @@ class FontWall:
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontwall.png')):
         """
         Save the font wall
+
         :param path: path where you want to save the font wall
         :return: None
         """
