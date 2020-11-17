@@ -51,6 +51,7 @@ class FontPreview:
     def __init__(self, font):
         """
         Object that represents the preview of a font
+
         :param font: font file
         """
         # Define properties
@@ -70,6 +71,7 @@ class FontPreview:
     def __str__(self):
         """
         String representation of font preview
+
         :return: string
         """
         return "font_name:{font},font_size:{size},text:{text},text_position:{position},dimension:{dimension}".format(
@@ -80,6 +82,7 @@ class FontPreview:
     def __resize(self):
         """
         Resize the font if it exceeds the size of the background
+
         :return: None
         """
         img = ImageDraw.Draw(self.image)
@@ -93,6 +96,7 @@ class FontPreview:
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpreview.png')):
         """
         Save the preview font
+
         :param path: path where you want to save the preview font
         :return: None
         """
@@ -101,6 +105,7 @@ class FontPreview:
     def draw(self, align='left'):
         """
         Draw image with text based on properties of this object
+
         :param align: alignment of text. Available 'left', 'center' and 'right'
         :return: None
         """
@@ -116,6 +121,7 @@ class FontPreview:
     def set_font_size(self, size):
         """
         Set size of font
+
         :param size: size of font
         :return: None
         """
@@ -129,8 +135,11 @@ class FontPreview:
     def set_text_position(self, position):
         """
         Set position of text
+
         :param position: Position can be a tuple with x and y axis, or a string.
-        The strings available are 'center', 'top', 'below', 'rcenter', 'rtop', 'rbelow', 'lcenter', 'ltop' and 'lbelow'.
+            The strings available are 'center', 'top', 'below', 'rcenter', 'rtop', 'rbelow', 'lcenter', 'ltop'
+            and 'lbelow'.
+
         :return: None
         """
         # Create image drawer
