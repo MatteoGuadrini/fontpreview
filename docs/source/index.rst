@@ -10,6 +10,8 @@ Welcome to fontpreview's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   package
+
 
 
 Indices and tables
