@@ -200,7 +200,7 @@ class FontLogo(FontPreview):
         # Check maximum size
         self.__max_size(size)
         # Built a logo font
-        self.draw()
+        self.set_text_position('center')
 
 
 class FontWall:

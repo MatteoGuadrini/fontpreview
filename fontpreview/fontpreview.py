@@ -129,7 +129,7 @@ class FontPreview:
         self.font_size = size
         self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
         self.__resize()
-        # Create default image
+        # Create image
         self.draw()
 
     def set_text_position(self, position):
@@ -150,7 +150,7 @@ class FontPreview:
             self.font_position = CALC_POSITION.get(position, CALC_POSITION['center'])(
                 self.dimension, img.multiline_textsize(self.font_text, self.font)
             )
-        # Create default image
+        # Create image
         self.draw()
 
 # endregion
