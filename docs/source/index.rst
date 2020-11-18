@@ -6,11 +6,16 @@
 Welcome to fontpreview's documentation!
 =======================================
 
+*fontpreview* is a python library, which allows you to create simple and advanced previews of specific fonts.
+
+In addition, the library includes some classes that allow the advanced creation of preview pages of the characters that make up a font.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    install
+   example
    package
 
 
