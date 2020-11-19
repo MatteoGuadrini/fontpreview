@@ -4,7 +4,7 @@ fontpreview modules
 fontpreview
 ___________
 
-fontpreview module contains FontPreview class
+fontpreview module contains **FontPreview** class
 
 .. automodule:: fontpreview.fontpreview
     :members:
@@ -14,7 +14,7 @@ fontpreview module contains FontPreview class
 fontbanner
 __________
 
-fontbanner module contains FontBanner, FontLogo and FontWall class
+fontbanner module contains **FontBanner**, **FontLogo** and **FontWall** class
 
 .. automodule:: fontpreview.fontbanner
     :members:
@@ -24,7 +24,7 @@ fontbanner module contains FontBanner, FontLogo and FontWall class
 fontpage
 ________
 
-fontpage module contains FontPage and FontPageTemplate class
+fontpage module contains **FontPage** and **FontPageTemplate** class
 
 .. automodule:: fontpreview.fontpage
     :members:

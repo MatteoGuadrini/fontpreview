@@ -10,7 +10,7 @@ Here are some examples that allow basic and advanced use of the library.
 FontPreview example
 *******************
 
-FontPreview is a class that creates objects that allow the representation of a font in an image.
+*FontPreview* is a class that creates objects that allow the representation of a font in an image.
 By default, it creates a white rectangle with a preview of the letters *a b c d e f* in black.
 
 .. code-block:: python
@@ -41,3 +41,56 @@ Now, let's modify some properties.
 
 .. image:: https://i.ibb.co/0rY6YqR/fp.png
     :alt: FontPreview image
+
+A background image can also be set.
+
+.. code-block:: python
+
+    fp.bg_image = '/tmp/python.png'     # a background image
+    fp.draw()                           # draw it again
+    fp.save('/tmp/fp.png')
+
+.. image:: https://i.ibb.co/RScSMvQ/fp.png
+    :alt: FontPreview image
+
+FontBanner example
+******************
+
+*FontBanner* is a FontPreview-based class, which adds some features to work with one or more objects based on the FontPreview class.
+With this object since its creation, it is possible to define the orientation: *landscape* or *portrait*.
+
+.. code-block:: python
+
+    from fontpreview import FontBanner
+    fb = FontBanner('/tmp/noto.ttf', 'landscape', bg_color=(253, 194, 45))   # path of font file
+    fb.save('/tmp/fb.png')
+
+.. image:: https://i.ibb.co/MPJ1Dr8/fb.png
+    :alt: FontBanner image
+
+Let's go and change some of the properties.
+
+.. code-block:: python
+
+    fb.set_mode('fontname')         # set font_text properties to font name
+    fb.set_orientation('portrait')  # set vertical orientation of image
+    fb.save('/tmp/fb.png')
+
+.. image:: https://i.ibb.co/RgLSZC1/fb.png
+    :alt: FontBanner image
+    :height: 700
+
+And now, let's add the *FontPreview* object created earlier.
+
+.. code-block:: python
+
+    fb.font_text = 'Python'
+    fb.set_font_size(50)            # change font size: FontPreview method
+    fb.bg_color = 'white'           # set color with name string
+    fb.set_orientation((300, 800))  # change orientation and size again with tuple
+    fb.draw()                       # draw it again
+    fb.add_image(fp, (0, 150))      # add FontPreview object to FontBanner object
+    fb.save('/tmp/fb.png')
+
+.. image:: https://i.ibb.co/rfMwd7R/fb.png
+    :alt: FontBanner image

@@ -1,6 +1,8 @@
 Installation
 ############
 
+Here are the installation instructions
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
