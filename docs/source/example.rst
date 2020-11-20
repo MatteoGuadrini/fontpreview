@@ -29,9 +29,9 @@ Now, let's modify some properties.
 .. code-block:: python
 
     fp.font_text = 'Welcome to fontpreview'
-    fp.bg_color = (253, 194, 45)        # Background color. RGB color: yellow
+    fp.bg_color = (253, 194, 45)        # background color. RGB color: yellow
     fp.dimension = (300, 250)           # specify dimension in pixel: 300 x 250
-    fp.fg_color = (51, 153, 193)        # Foreground or font color. RGB color: blue
+    fp.fg_color = (51, 153, 193)        # foreground or font color. RGB color: blue
     fp.set_font_size(50)                # set font size to 50 pixel
     fp.set_text_position('ltop')        # place the text at the top left.
     # before saving the image, you need to draw it again
@@ -93,4 +93,33 @@ And now, let's add the *FontPreview* object created earlier.
     fb.save('/tmp/fb.png')
 
 .. image:: https://i.ibb.co/rfMwd7R/fb.png
+    :alt: FontBanner image
+
+
+FontLogo example
+****************
+
+*FontLogo* is a FontPreview-based class, which represents a square where inside there are one or two letters.
+The fontpreview package logo was generated with this class.
+
+.. code-block:: python
+
+    from fontpreview import FontLogo
+    fl = FontLogo('/tmp/noto.ttf', 'Fp')    # specify font and letters. Max 2
+    fl.save('/tmp/fl.png')
+
+.. image:: https://i.ibb.co/j302Y5k/fl.png
+    :alt: FontBanner image
+
+Being a FontPreview based object, it inherits all its characteristics.
+
+.. code-block:: python
+
+    fl.font_text = 'TS'
+    fl.bg_color = (45, 121, 199)    # background color. RGB color: blue
+    fl.fg_color = 'white'           # foreground color. RGB color: white
+    fl.set_text_position('rbelow')  # position is "right-below"
+    fl.save('/tmp/fl.png')
+
+.. image:: https://i.ibb.co/MSFRkfP/fl.png
     :alt: FontBanner image
