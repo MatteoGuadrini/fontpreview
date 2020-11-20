@@ -222,3 +222,30 @@ It is also possible to add a FontLogo object to the header, after the header has
 
 .. image:: https://i.ibb.co/dtt9Ct7/fpage.png
     :alt: FontPage image
+
+FontPageTemplate example
+************************
+
+*FontPageTemplate* is a class that represents a template applicable to the FontPage object.
+
+In this object, only the specifications of each part of the FontPage object (header, body, footer) are defined: font size, text position, unit.
+
+The units (default 6) are equal parts divided across the height of the page.
+
+.. code-block:: python
+
+    from fontpreview import FontPageTemplate
+    template = FontPageTemplate(3508)           # max height of page
+    template.set_body(170, 1, 'lcenter')        # font_size, units, text_position
+    template.set_footer(100, 4, 'lcenter')      # font_size, units, text_position
+    # Create FontPage object
+    fpage = FontPage(template=template)
+    fpage.set_header(header)
+    fpage.set_body(body)
+    fpage.set_footer(footer)
+    # Design all parts
+    fpage.draw()
+    fpage.save('/tmp/fpage_template.png')
+
+.. image:: https://i.ibb.co/n7L9nNG/fpage-template.png
+    :alt: FontPage image
