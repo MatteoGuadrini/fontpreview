@@ -56,7 +56,7 @@ Font page example:
 ```python
 from fontpreview import FontPage, FontBanner
 
-# Define the various parts of wall
+# Define the various parts of page
 header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
 body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
 footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
@@ -77,7 +77,7 @@ Font page with template example:
 ```python
 from fontpreview import FontPage, FontPageTemplate, FontBanner
 
-# Define the various parts of wall
+# Define the various parts of page
 header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
 body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
 footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')

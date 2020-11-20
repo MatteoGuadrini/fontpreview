@@ -180,3 +180,45 @@ Any changes made on the parts of the wall are made to the final result.
 
 .. image:: https://i.ibb.co/W0B3LYn/fw.png
     :alt: FontWall image
+
+FontPage example
+****************
+
+*FontPage* is a class that represents a sample page per font. This object consists of three parts: header, body and footer.
+These three parts have a standard size defined by a FontPageTemplate (see below).
+
+.. code-block:: python
+
+    from fontpreview import FontPage, FontBanner
+    # Define the various parts of wall
+    header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+    body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
+    footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+    # Create FontPage object
+    fpage = FontPage()
+    fpage.set_header(header)
+    fpage.set_body(body)
+    fpage.set_footer(footer)
+    # Design all parts
+    fpage.draw()
+    fpage.save('/tmp/fpage.png')
+
+.. image:: https://i.ibb.co/LgFLnXk/fpage.png
+    :alt: FontPage image
+
+Even with this object, any changes made to the individual parts of the page appear in the final result.
+
+It is also possible to add a FontLogo object to the header, after the header has been defined.
+
+.. code-block:: python
+
+    from fontpreview import FontLogo
+    fl = FontLogo('/tmp/noto.ttf', 'Fp')    # create logo
+    fpage.set_logo(fl)                      # set logo on header
+    fpage.body.bg_color = (253, 194, 45)
+    fpage.body.set_font_size(150)
+    fpage.draw()
+    fpage.save('/tmp/fpage.png')
+
+.. image:: https://i.ibb.co/dtt9Ct7/fpage.png
+    :alt: FontPage image
