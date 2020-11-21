@@ -4,6 +4,15 @@
 
 This is a library that allows you to create preview images from one or more selected fonts.
 
+Full docs is here: [ReadTheDocs](https://fontpreview.readthedocs.io/en/latest/)
+
+## Installation
+
+Use Pypi:
+```console
+$ pip install --user fontpreview
+```
+
 ## Simple usage
 
 Preview example:
@@ -56,7 +65,7 @@ Font page example:
 ```python
 from fontpreview import FontPage, FontBanner
 
-# Define the various parts of wall
+# Define the various parts of page
 header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
 body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
 footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
@@ -77,7 +86,7 @@ Font page with template example:
 ```python
 from fontpreview import FontPage, FontPageTemplate, FontBanner
 
-# Define the various parts of wall
+# Define the various parts of page
 header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
 body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
 footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')

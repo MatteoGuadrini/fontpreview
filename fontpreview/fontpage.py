@@ -38,6 +38,7 @@ class FontPage:
     def __init__(self, template=None, dimension=(2480, 3508)):
         """
         Object that represents the page of a font banners
+
         :param template: template used to build the page
         :param dimension: dimension of page. Default A4 in pixels.
         """
@@ -56,6 +57,7 @@ class FontPage:
     def __compose(self):
         """
         Dynamically compose the page
+
         :return: None
         """
         # Check if the template is specified
@@ -78,6 +80,7 @@ class FontPage:
     def set_header(self, header):
         """
         Set header of Font page
+
         :param header: FontPreview object
         :return: None
         """
@@ -94,6 +97,7 @@ class FontPage:
     def set_logo(self, logo):
         """
         Set logo of Font page
+
         :param logo: FontLogo object
         :return: None
         """
@@ -115,6 +119,7 @@ class FontPage:
     def set_body(self, body):
         """
         Set body of Font page
+
         :param body: FontPreview object
         :return: None
         """
@@ -131,6 +136,7 @@ class FontPage:
     def set_footer(self, footer):
         """
         Set footer of Font page
+
         :param footer: FontPreview object
         :return: None
         """
@@ -147,6 +153,7 @@ class FontPage:
     def draw(self, separator=True, sep_color='black', sep_width=5):
         """
         Draw font page with header, logo, body and footer
+
         :param separator: line that separates the parts
         :param sep_color: separator color
         :param sep_width: separator width
@@ -173,6 +180,7 @@ class FontPage:
     def save(self, path=os.path.join(os.path.abspath(os.getcwd()), 'fontpage.png')):
         """
         Save the font page
+
         :param path: path where you want to save the font page
         :return: None
         """
@@ -187,6 +195,7 @@ class FontPageTemplate:
     def __init__(self, page_height=3508, units_number=6):
         """
         Object representing the template of a FontPage object
+
         :param page_height: height of FontPage object. Default is 3508.
         :param units_number: division number to create the units
         """
@@ -209,6 +218,7 @@ class FontPageTemplate:
     def __check_units(self, context, unit):
         """
         Check the overrun of the units
+
         :param context: context is part of page; header, body or footer
         :param unit: height of unit
         :return: None
@@ -229,6 +239,7 @@ class FontPageTemplate:
     def set_header(self, font_size, units, text_position):
         """
         Setting the header properties
+
         :param font_size: the header font size
         :param units: the header units number
         :param text_position: the header text position
@@ -244,6 +255,7 @@ class FontPageTemplate:
     def set_body(self, font_size, units, text_position):
         """
         Setting the body properties
+
         :param font_size: the body font size
         :param units: the body units number
         :param text_position: the body text position
@@ -259,6 +271,7 @@ class FontPageTemplate:
     def set_footer(self, font_size, units, text_position):
         """
         Setting the footer properties
+
         :param font_size: the footer font size
         :param units: the footer units number
         :param text_position: the footer text position
