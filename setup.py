@@ -21,7 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from distutils.core import setup
-from fontpreview import VERSION
+VERSION = '0.8.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

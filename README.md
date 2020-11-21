@@ -4,6 +4,15 @@
 
 This is a library that allows you to create preview images from one or more selected fonts.
 
+Full docs is here: [ReadTheDocs](https://fontpreview.readthedocs.io/en/latest/)
+
+## Installation
+
+Use Pypi:
+```console
+$ pip install --user fontpreview
+```
+
 ## Simple usage
 
 Preview example:
