@@ -249,3 +249,36 @@ The units (default 6) are equal parts divided across the height of the page.
 
 .. image:: https://i.ibb.co/n7L9nNG/fpage-template.png
     :alt: FontPage image
+
+Declarative object creation
+***************************
+
+Each FontPreview based object in this module has a declarative instance implementation.
+
+.. code-block:: python
+
+    from fontpreview import FontPreview, FontBanner, FontLogo
+    # FontPreview object
+    fp = FontPreview('/tmp/noto.ttf',
+                    font_size=50,
+                    font_text='some text',
+                    color_system='RGB',
+                    bg_color='blue',
+                    fg_color='yellow',
+                    dimension=(800, 400))
+    # FontBanner object
+    fb = FontBanner('/tmp/noto.ttf',
+                    orientation='portrait',
+                    bg_color='blue',
+                    fg_color='yellow',
+                    mode='paragraph',
+                    font_size=70,
+                    color_system='RGB')
+    # FontLogo object
+    fb = FontLogo('/tmp/noto.ttf',
+                    'Fl',
+                    size=(170, 170),
+                    bg_color='blue',
+                    fg_color='yellow',
+                    font_size=50,
+                    color_system='RGB')
