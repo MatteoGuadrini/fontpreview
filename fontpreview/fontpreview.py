@@ -77,9 +77,8 @@ class FontPreview:
         self.bg_color = bg_color
         self.fg_color = fg_color
         self.dimension = dimension
-        self.font_position = None
+        self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
         # Create default image
-        self.set_text_position('center')
         self.draw()
 
     def __str__(self):
