@@ -54,6 +54,14 @@ class FontPage:
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
 
+    def __str__(self):
+        """
+        String representation of font page
+
+        :return: string
+        """
+        return 'header={0}, body={1}, footer={2}'.format(self.header, self.body, self.footer)
+
     def __compose(self):
         """
         Dynamically compose the page
@@ -215,6 +223,19 @@ class FontPageTemplate:
         self.footer_units = self.unit * 2
         self.footer_text_position = 'center'
 
+    def __str__(self):
+        """
+        String representation of font page
+
+        :return: string
+        """
+        return 'page_height={0}, unit={1}, header=height:{2},units:{3},text_position:{4}, ' \
+               'body=height:{2},units:{3},text_position:{4}, footer=height:{2},units:{3},text_position:{4}'.format(
+                self.page_height, self.unit, self.header_font_size, self.header_units, self.header_text_position,
+                self.body_font_size, self.body_units, self.body_text_position, self.footer_font_size, self.footer_units,
+                self.footer_text_position
+                )
+
     def __check_units(self, context, unit):
         """
         Check the overrun of the units
@@ -283,6 +304,5 @@ class FontPageTemplate:
         self.__check_units('footer', unit)
         self.footer_units = unit
         self.footer_text_position = text_position
-
 
 # endregion

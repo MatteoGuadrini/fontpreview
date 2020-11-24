@@ -1,3 +1,5 @@
+<img src="https://fontpreview.readthedocs.io/en/latest/_static/fp.png" alt="fontpreview package">
+<br>
 # fontpreview: Python library for font previews
 
 > This module is under development
