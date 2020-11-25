@@ -9,16 +9,27 @@ if not os.path.exists(font):
 
 
 class TestFontPreview(unittest.TestCase):
-    def test_create_instance(self):
-        fp, fb, fl = FontPreview(font), FontBanner(font), FontLogo(font, 'Fl')
-        fw, fpage, fpage_t = FontWall([fb]), FontPage(), FontPageTemplate(3508)
+    fp, fb, fl = FontPreview(font), FontBanner(font), FontLogo(font, 'Fl')
+    fw, fpage, fpage_t = FontWall([fb]), FontPage(), FontPageTemplate(3508)
+
+    def test_instance(self):
         # test if instance has been created
-        self.assertIsInstance(fp, FontPreview)
-        self.assertIsInstance(fb, FontBanner)
-        self.assertIsInstance(fl, FontLogo)
-        self.assertIsInstance(fw, FontWall)
-        self.assertIsInstance(fpage, FontPage)
-        self.assertIsInstance(fpage_t, FontPageTemplate)
+        self.assertIsInstance(self.fp, FontPreview)
+        self.assertIsInstance(self.fb, FontBanner)
+        self.assertIsInstance(self.fl, FontLogo)
+        self.assertIsInstance(self.fw, FontWall)
+        self.assertIsInstance(self.fpage, FontPage)
+        self.assertIsInstance(self.fpage_t, FontPageTemplate)
+
+    def test_set_color_with_name(self):
+        # change background color
+        self.fp.bg_color = self.fb.bg_color = self.fl.bg_color = 'blue'
+        # change background color
+        self.fp.fg_color = self.fb.fg_color = self.fl.fg_color = 'yellow'
+        # test draw it
+        self.fp.draw()
+        self.fb.draw()
+        self.fl.draw()
 
 
 if __name__ == '__main__':
