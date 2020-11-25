@@ -41,6 +41,27 @@ class TestFontPreview(unittest.TestCase):
         self.fb.draw()
         self.fl.draw()
 
+    def test_set_dimension(self):
+        # test dimension of FontPreview object
+        self.fp.dimension = (1000, 1000)
+        # test draw it
+        self.fp.draw()
+        # test dimension of FontBanner object
+        self.fb.set_orientation((1000, 1000))
+        # test draw it
+        self.fb.draw()
+        # test dimension of FontBanner object and font position
+        self.fb.set_orientation('landscape', 'lcenter')
+        # test draw it
+        self.fb.draw()
+        # test dimension of FontLogo object
+        self.fl.new_size((75, 75))
+        self.fl.new_size((100, 100))
+        self.fl.new_size((150, 150))
+        self.fl.new_size((170, 170))
+        # test draw it
+        self.fp.draw()
+
 
 if __name__ == '__main__':
     unittest.main()
