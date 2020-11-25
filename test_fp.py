@@ -31,6 +31,16 @@ class TestFontPreview(unittest.TestCase):
         self.fb.draw()
         self.fl.draw()
 
+    def test_set_color_with_tuple(self):
+        # change background color
+        self.fp.bg_color = self.fb.bg_color = self.fl.bg_color = (51, 153, 193)
+        # change background color
+        self.fp.fg_color = self.fb.fg_color = self.fl.fg_color = (253, 194, 45)
+        # test draw it
+        self.fp.draw()
+        self.fb.draw()
+        self.fl.draw()
+
 
 if __name__ == '__main__':
     unittest.main()
