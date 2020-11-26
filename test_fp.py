@@ -74,6 +74,10 @@ class TestFontPreview(unittest.TestCase):
         self.fpage.draw()
         self.assertEqual(self.fpage.page.size, self.fpage.dimension)
 
+    def test_add_image(self):
+        # test add image to FontBanner
+        self.fb.add_image(self.fp, (500, 500))
+
 
 if __name__ == '__main__':
     unittest.main()
