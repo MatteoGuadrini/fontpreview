@@ -46,14 +46,17 @@ class TestFontPreview(unittest.TestCase):
         self.fp.dimension = (1000, 1000)
         # test draw it
         self.fp.draw()
+        self.assertEqual(self.fp.image.size, self.fp.dimension)
         # test dimension of FontBanner object
         self.fb.set_orientation((1000, 1000))
         # test draw it
         self.fb.draw()
+        self.assertEqual(self.fb.image.size, self.fb.dimension)
         # test dimension of FontBanner object and font position
         self.fb.set_orientation('landscape', 'lcenter')
         # test draw it
         self.fb.draw()
+        self.assertEqual(self.fb.image.size, self.fb.dimension)
         # test dimension of FontLogo object
         self.fl.new_size((75, 75))
         self.fl.new_size((100, 100))
@@ -61,6 +64,15 @@ class TestFontPreview(unittest.TestCase):
         self.fl.new_size((170, 170))
         # test draw it
         self.fp.draw()
+        self.assertEqual(self.fl.image.size, self.fl.dimension)
+        # test dimension of FontPage
+        self.fpage.set_header(self.fb)
+        self.fpage.set_body(self.fb)
+        self.fpage.set_footer(self.fb)
+        self.fpage.dimension = (1000, 1000)
+        # test draw it
+        self.fpage.draw()
+        self.assertEqual(self.fpage.page.size, self.fpage.dimension)
 
 
 if __name__ == '__main__':
