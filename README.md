@@ -1,5 +1,6 @@
 <img src="https://fontpreview.readthedocs.io/en/latest/_static/fp.png" alt="fontpreview package">
 <br>
+
 # fontpreview: Python library for font previews
 
 > This module is under development
@@ -198,6 +199,8 @@ Come today, we are organized to dare to listen to them and answers, every day of
 Thanks to Mark Lutz for writing the _Learning Python_ and _Programming Python_ books that make up my python foundation.
 
 Thanks to Kenneth Reitz and Tanya Schlusser for writing the _The Hitchhiker’s Guide to Python_ books.
+
+Thanks to Dane Hillard for writing the _Practices of the Python Pro_ books.
 
 Special thanks go to my wife, who understood the hours of absence for this development. 
 Thanks to my children, for the daily inspiration they give me and to make me realize, that life must be simple.
