@@ -97,6 +97,20 @@ class TestFontPreview(unittest.TestCase):
         # Test FontBanner font size
         self.fl.set_text_position('center')
 
+    def test_set_text(self):
+        # Test FontPreview font size
+        self.fp.font_text = 'unittest'
+        self.fp.draw(align='center')
+        self.assertEqual(self.fp.font_text, 'unittest')
+        # Test FontBanner font size
+        self.fb.set_mode('fontname')
+        self.fb.draw(align='center')
+        self.assertEqual(self.fb.font_text, '{0}'.format(self.fb.font.getname()[0]))
+        # Test FontBanner font size
+        self.fl.font_text = 'ut'
+        self.fl.draw(align='center')
+        self.assertEqual(self.fl.font_text, 'ut')
+
 
 if __name__ == '__main__':
     unittest.main()
