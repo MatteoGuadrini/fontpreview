@@ -89,6 +89,14 @@ class TestFontPreview(unittest.TestCase):
         self.fl.set_font_size(50)
         self.assertEqual(self.fl.font.size, 50)
 
+    def test_text_position(self):
+        # Test FontPreview font size
+        self.fp.set_text_position('lcenter')
+        # Test FontBanner font size
+        self.fb.set_text_position('rcenter')
+        # Test FontBanner font size
+        self.fl.set_text_position('center')
+
 
 if __name__ == '__main__':
     unittest.main()
