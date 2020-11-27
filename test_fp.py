@@ -125,6 +125,28 @@ class TestFontPreview(unittest.TestCase):
         self.assertIsInstance(fw, FontWall)
         fw.draw(fw.max_tile)
 
+    def test_template_page(self):
+        # Create FontPage
+        page = FontPage(template=self.fpage_t)
+        # Test instance
+        self.assertIsInstance(page, FontPage)
+        # Test method FontPageTemplate
+        self.fpage_t.set_header(120, 1, 'center')
+        self.fpage_t.set_body(170, 3, 'left')
+        self.fpage_t.set_footer(100, 2, 'right')
+        # Test value of header
+        self.assertEqual(self.fpage_t.header_text_position, 'center')
+        self.assertEqual(self.fpage_t.header_font_size, 120)
+        self.assertEqual(self.fpage_t.header_units, self.fpage_t.unit * 1)
+        # Test value of header
+        self.assertEqual(self.fpage_t.body_text_position, 'left')
+        self.assertEqual(self.fpage_t.body_font_size, 170)
+        self.assertEqual(self.fpage_t.body_units, self.fpage_t.unit * 3)
+        # Test value of header
+        self.assertEqual(self.fpage_t.footer_text_position, 'right')
+        self.assertEqual(self.fpage_t.footer_font_size, 100)
+        self.assertEqual(self.fpage_t.footer_units, self.fpage_t.unit * 2)
+
 
 if __name__ == '__main__':
     unittest.main()
