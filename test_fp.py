@@ -111,6 +111,20 @@ class TestFontPreview(unittest.TestCase):
         self.fl.draw(align='center')
         self.assertEqual(self.fl.font_text, 'ut')
 
+    def test_add_to_wall(self):
+        # Create FontWall
+        fw = FontWall([self.fb, self.fp, self.fl])
+        self.assertIsInstance(fw, FontWall)
+        fw.draw(fw.max_tile)
+        # Create FontWall with max_tile args
+        fw = FontWall([self.fb, self.fp, self.fl], max_tile=3)
+        self.assertIsInstance(fw, FontWall)
+        fw.draw(fw.max_tile)
+        # Create FontWall with max_tile args and
+        fw = FontWall([self.fb, self.fp, self.fl], max_tile=3, mode='vertical')
+        self.assertIsInstance(fw, FontWall)
+        fw.draw(fw.max_tile)
+
 
 if __name__ == '__main__':
     unittest.main()
