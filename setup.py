@@ -20,8 +20,8 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from distutils.core import setup
-VERSION = '0.8.0'
+from setuptools import setup
+VERSION = '0.9.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

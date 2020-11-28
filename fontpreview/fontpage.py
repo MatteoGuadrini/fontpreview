@@ -54,6 +54,14 @@ class FontPage:
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
 
+    def __str__(self):
+        """
+        String representation of font page
+
+        :return: string
+        """
+        return 'header={0}, body={1}, footer={2}'.format(self.header, self.body, self.footer)
+
     def __compose(self):
         """
         Dynamically compose the page
@@ -64,18 +72,30 @@ class FontPage:
         if not self.template:
             self.template = FontPageTemplate(self.dimension[1])
         # Check height of each part
-        if self.header.image.height != self.template.header_units:
-            self.header.dimension = (self.page.width, self.template.header_units)
-            self.header.set_font_size(self.template.header_font_size)
-            self.header.set_text_position(self.template.header_text_position)
-        if self.body.image.height != self.template.body_units:
-            self.body.dimension = (self.page.width, self.template.body_units)
-            self.body.set_font_size(self.template.body_font_size)
-            self.body.set_text_position(self.template.body_text_position)
-        if self.footer.image.height != self.template.footer_units:
-            self.footer.dimension = (self.page.width, self.template.footer_units)
-            self.footer.set_font_size(self.template.footer_font_size)
-            self.footer.set_text_position(self.template.footer_text_position)
+        try:
+            # Compose background
+            self.dimension = (self.dimension[0], self.template.page_height)
+            self.page = Image.new(self.color_system, self.dimension, color='white')
+            # Compose header
+            self.set_header(self.header)
+            if self.header.image.height != self.template.header_units:
+                self.header.dimension = (self.page.width, self.template.header_units)
+                self.header.set_font_size(self.template.header_font_size)
+                self.header.set_text_position(self.template.header_text_position)
+            # Compose body
+            self.set_body(self.body)
+            if self.body.image.height != self.template.body_units:
+                self.body.dimension = (self.page.width, self.template.body_units)
+                self.body.set_font_size(self.template.body_font_size)
+                self.body.set_text_position(self.template.body_text_position)
+            # Compose footer
+            self.set_footer(self.footer)
+            if self.footer.image.height != self.template.footer_units:
+                self.footer.dimension = (self.page.width, self.template.footer_units)
+                self.footer.set_font_size(self.template.footer_font_size)
+                self.footer.set_text_position(self.template.footer_text_position)
+        except AttributeError:
+            raise AttributeError('header, body and footer is mandatory object')
 
     def set_header(self, header):
         """
@@ -215,6 +235,19 @@ class FontPageTemplate:
         self.footer_units = self.unit * 2
         self.footer_text_position = 'center'
 
+    def __str__(self):
+        """
+        String representation of font page
+
+        :return: string
+        """
+        return 'page_height={0}, unit={1}, header=height:{2},units:{3},text_position:{4}, ' \
+               'body=height:{2},units:{3},text_position:{4}, footer=height:{2},units:{3},text_position:{4}'.format(
+                self.page_height, self.unit, self.header_font_size, self.header_units, self.header_text_position,
+                self.body_font_size, self.body_units, self.body_text_position, self.footer_font_size, self.footer_units,
+                self.footer_text_position
+                )
+
     def __check_units(self, context, unit):
         """
         Check the overrun of the units
@@ -283,6 +316,5 @@ class FontPageTemplate:
         self.__check_units('footer', unit)
         self.footer_units = unit
         self.footer_text_position = text_position
-
 
 # endregion

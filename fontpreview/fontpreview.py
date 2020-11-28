@@ -48,22 +48,35 @@ class FontPreview:
     Class that represents the preview of a font
     """
 
-    def __init__(self, font):
+    def __init__(self, font,
+                 font_size=64,
+                 font_text='a b c d e f',
+                 color_system='RGB',
+                 bg_color='white',
+                 fg_color='black',
+                 dimension=(700, 327)
+                 ):
         """
         Object that represents the preview of a font
 
         :param font: font file
+        :param font_size: font size. Default is 64.
+        :param font_text: font text representation. Default is 'a b c d e f'.
+        :param color_system: color system string. Default is 'RGB'.
+        :param bg_color: background color of preview. Default is 'white'.
+        :param fg_color: foreground or font color of preview. Default is 'black'.
+        :param dimension: dimension of preview. Default is 700x327.
         """
         # Define properties
         self.image = None
-        self.font_size = 64
-        self.font_text = 'a b c d e f'
+        self.font_size = font_size
+        self.font_text = font_text
         self.font = ImageFont.truetype(font=font, size=self.font_size)
-        self.color_system = 'RGB'
+        self.color_system = color_system
         self.bg_image = None
-        self.bg_color = 'white'
-        self.fg_color = 'black'
-        self.dimension = (700, 327)
+        self.bg_color = bg_color
+        self.fg_color = fg_color
+        self.dimension = dimension
         self.font_position = CALC_POSITION['center'](self.dimension, self.font.getsize(self.font_text))
         # Create default image
         self.draw()

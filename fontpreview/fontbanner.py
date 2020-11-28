@@ -49,25 +49,36 @@ class FontBanner(FontPreview):
     Class that represents the banner of a font
     """
 
-    def __init__(self, font, orientation='landscape', bg_color='white', fg_color='black', mode='letter'):
+    def __init__(self, font,
+                 orientation='landscape',
+                 bg_color='white',
+                 fg_color='black',
+                 mode='letter',
+                 font_size=64,
+                 color_system='RGB'
+                 ):
         """
         Object that represents the banner of a font
 
         :param font: font file
-        :param orientation: the orientation of the banner; 'landscape', 'portrait' or tuple(x,y)
-        :param bg_color: background color
-        :param fg_color: font color
-        :param mode: the text inside the banner; 'letter','fontname', 'paragraph', 'alpha' and 'combination'
+        :param orientation: the orientation of the banner; 'landscape', 'portrait' or tuple(x,y).
+        :param bg_color: background color of preview. Default is 'white'.
+        :param fg_color: foreground or font color of preview. Default is 'black'.
+        :param mode: the text inside the banner; 'letter','fontname', 'paragraph', 'alpha' and 'combination'.
+        :param font_size: font size. Default is 64.
+        :param color_system: color system string. Default is 'RGB'.
         """
         # Define properties
-        FontPreview.__init__(self, font=font)
+        FontPreview.__init__(self, font=font,
+                             bg_color=bg_color,
+                             fg_color=fg_color,
+                             font_size=font_size,
+                             color_system=color_system)
         self.set_orientation(orientation)
-        self.bg_color = bg_color
-        self.fg_color = fg_color
         self.mode = mode
         self.set_text_position('center')
         # Create default image
-        self.set_mode(mode=mode)
+        self.set_mode(mode=self.mode)
 
     def __str__(self):
         """
@@ -156,15 +167,30 @@ class FontLogo(FontPreview):
     Class that represents the logo of a font
     """
 
-    def __init__(self, font, letters, size=(100, 100)):
+    def __init__(self, font,
+                 letters,
+                 size=(100, 100),
+                 bg_color='white',
+                 fg_color='black',
+                 font_size=64,
+                 color_system='RGB'
+                 ):
         """
         Object that represents the logo of a font
 
         :param font: font file
         :param letters: One or two letters (or anything)
         :param size: size of logo square. Default is (100, 100)
+        :param bg_color: background color of preview. Default is 'white'.
+        :param fg_color: foreground or font color of preview. Default is 'black'.
+        :param font_size: font size. Default is 64.
+        :param color_system: color system string. Default is 'RGB'.
         """
-        FontPreview.__init__(self, font=font)
+        FontPreview.__init__(self, font=font,
+                             bg_color=bg_color,
+                             fg_color=fg_color,
+                             font_size=font_size,
+                             color_system=color_system)
         # Check if the letters exceed the number 2
         if len(letters) > 2:
             raise ValueError('letters can be maximum two')
