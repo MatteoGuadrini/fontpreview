@@ -9,6 +9,15 @@ This is a library that allows you to create preview images from one or more sele
 
 Full docs is here: [ReadTheDocs](https://fontpreview.readthedocs.io/en/latest/)
 
+## Test
+
+If you want to test the package before installing, use the test:
+```console
+$ git clone https://github.com/MatteoGuadrini/fontpreview.git
+$ cd fontpreview
+$ python -m unittest test_fp.py
+```
+
 ## Installation
 
 Use Pypi:
