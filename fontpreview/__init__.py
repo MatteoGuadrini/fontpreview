@@ -24,4 +24,4 @@ from .fontpreview import FontPreview
 from .fontbanner import FontBanner, FontLogo, FontWall
 from .fontpage import FontPage, FontPageTemplate
 
-VERSION = '0.8.0'
+VERSION = '0.9.0'
