@@ -21,7 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import setup
-VERSION = '0.9.0'
+from fontpreview.__version__ import VERSION
 
 with open("README.md", "r") as fh:
     long_description = fh.read()

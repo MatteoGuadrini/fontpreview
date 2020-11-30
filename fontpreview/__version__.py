@@ -3,7 +3,7 @@
 # vim: se ts=4 et syn=python:
 
 # created by: matteo.guadrini
-# __init__.py -- fontpreview
+# __version__ -- fontpreview
 #
 #     Copyright (C) 2020 Matteo Guadrini <matteo.guadrini@hotmail.it>
 #
@@ -19,7 +19,4 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-from .fontpreview import FontPreview
-from .fontbanner import FontBanner, FontLogo, FontWall
-from .fontpage import FontPage, FontPageTemplate
+VERSION = '0.9.0'
