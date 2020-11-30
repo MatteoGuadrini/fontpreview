@@ -46,5 +46,6 @@ setup(
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
             "Operating System :: OS Independent",
         ],
+    scripts=['bin/fp'],
     python_requires='>=3.6'
 )

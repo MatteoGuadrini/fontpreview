@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+# vim: se ts=4 et syn=python:
+
+# created by: matteo.guadrini
+# fp -- fontpreview
+#
+#     Copyright (C) 2020 Matteo Guadrini <matteo.guadrini@hotmail.it>
+#
+#     This program is free software: you can redistribute it and/or modify
+#     it under the terms of the GNU General Public License as published by
+#     the Free Software Foundation, either version 3 of the License, or
+#     (at your option) any later version.
+#
+#     This program is distributed in the hope that it will be useful,
+#     but WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#     GNU General Public License for more details.
+#
+#     You should have received a copy of the GNU General Public License
+#     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+from argparse import ArgumentParser
+from fontpreview import FontPreview
+from fontpreview.__version__ import VERSION
+
+
+def parse_arguments():
+    """
+    Function that captures the parameters and the arguments in the command line
+
+    :return: Parser object
+    """
+    # Create a common parser
+    common_parser = ArgumentParser(add_help=False)
+    common_parser.add_argument('--verbose', '-v', help='enable verbosity, for debug',
+                               dest='verbose', action='store_true')
+
+    # Create a principal parser
+    parser_object = ArgumentParser(prog='fp', description='FontPreview cli', parents=[common_parser])
+    parser_object.add_argument('--version', '-V', action='version', version='%(prog)s ' + VERSION)
+    parser_object.add_argument('font', help='font file path', dest='font_file')
+    parser_object.add_argument('-t', '--text', help='text include to preview image (default: a b c d e f)', dest='text')
+    parser_object.add_argument('-b', '--background', help='background color (default: white)', dest='bg')
+    parser_object.add_argument('-f', '--foreground', help='foreground color (default: black)', dest='fg')
+    parser_object.add_argument('-i', '--background-image', help='background image path', dest='image')
+    parser_object.add_argument('-d', '--dimension', help='dimension x and y (default: 700x327)', nargs=2,
+                               dest='dimension')
+    parser_object.add_argument('-s', '--save', help='save file path (default: current directory)', dest='save_path')
+    parser_object.add_argument('-p', '--text-position', help='save file path (default: center)',
+                               dest='text_position')
+    parser_object.add_argument('-z', '--size', help='size of font (default: 64)', dest='save')
+
+    # Return parser object
+    return parser_object
+
+
+if __name__ == '__main__':
+    # Parse arguments
+    option = parse_arguments()
+    args = option.parse_args()
