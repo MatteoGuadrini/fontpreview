@@ -45,17 +45,17 @@ def parse_arguments():
     parser_object.add_argument('-f', '--foreground', help='foreground color (default: black)', dest='fg_color')
     parser_object.add_argument('-i', '--background-image', help='background image path', dest='image')
     parser_object.add_argument('-d', '--dimension', help='dimension x and y (default: 700x327)', nargs=2,
-                               dest='dimension')
+                               dest='dimension', type=int)
     parser_object.add_argument('-s', '--save', help='save file path (default: current directory)', dest='save_path')
     parser_object.add_argument('-p', '--text-position', help='save file path (default: center)',
                                dest='text_position')
-    parser_object.add_argument('-z', '--size', help='size of font (default: 64)', dest='size')
+    parser_object.add_argument('-z', '--size', help='size of font (default: 64)', dest='size', type=int)
 
     # Return parser object
     return parser_object
 
 
-def check_arguments(arguments):
+def fp_arguments(arguments):
     """
     Check arguments and build dictionary arguments for FontPreview class
 
@@ -65,6 +65,8 @@ def check_arguments(arguments):
     # Initialize dictionary arguments
     fp_args = {}
     # Check all args passed in command line
+    if arguments.font:
+        fp_args['font'] = arguments.font
     if arguments.text:
         fp_args['font_text'] = arguments.text
     if arguments.bg_color:
@@ -75,16 +77,30 @@ def check_arguments(arguments):
         fp_args['bg_image'] = arguments.image
     if arguments.dimension:
         fp_args['dimension'] = tuple(arguments.dimension)
-    if arguments.text_position:
-        fp_args['font_position'] = arguments.text_position
     if arguments.size:
         fp_args['font_size'] = arguments.size
     # Return dictionary
     return fp_args
 
 
+def v_print(verbose, *message):
+    """
+    Format verbosity message
+
+    :param verbose: verbosity boolean
+    :param message: list of message to print in verbosity mode
+    :return: verbosity message
+    """
+    if verbose:
+        print('DEBUG:', *message)
+
+
 if __name__ == '__main__':
     # Parse arguments
     option = parse_arguments()
     args = option.parse_args()
-    fpargs = check_arguments(args)
+    fpargs = fp_arguments(args)
+
+    # Initialize object
+    fp = FontPreview(**fpargs)
+    v_print(args.verbose, 'font object => {0}'.format(fp))
