@@ -29,7 +29,7 @@ def parse_arguments():
     """
     Function that captures the parameters and the arguments in the command line
 
-    :return: Parser object
+    :return: parser object
     """
     # Create a common parser
     common_parser = ArgumentParser(add_help=False)
@@ -39,23 +39,52 @@ def parse_arguments():
     # Create a principal parser
     parser_object = ArgumentParser(prog='fp', description='FontPreview cli', parents=[common_parser])
     parser_object.add_argument('--version', '-V', action='version', version='%(prog)s ' + VERSION)
-    parser_object.add_argument('font', help='font file path', dest='font_file')
+    parser_object.add_argument('font', help='font file path')
     parser_object.add_argument('-t', '--text', help='text include to preview image (default: a b c d e f)', dest='text')
-    parser_object.add_argument('-b', '--background', help='background color (default: white)', dest='bg')
-    parser_object.add_argument('-f', '--foreground', help='foreground color (default: black)', dest='fg')
+    parser_object.add_argument('-b', '--background', help='background color (default: white)', dest='bg_color')
+    parser_object.add_argument('-f', '--foreground', help='foreground color (default: black)', dest='fg_color')
     parser_object.add_argument('-i', '--background-image', help='background image path', dest='image')
     parser_object.add_argument('-d', '--dimension', help='dimension x and y (default: 700x327)', nargs=2,
                                dest='dimension')
     parser_object.add_argument('-s', '--save', help='save file path (default: current directory)', dest='save_path')
     parser_object.add_argument('-p', '--text-position', help='save file path (default: center)',
                                dest='text_position')
-    parser_object.add_argument('-z', '--size', help='size of font (default: 64)', dest='save')
+    parser_object.add_argument('-z', '--size', help='size of font (default: 64)', dest='size')
 
     # Return parser object
     return parser_object
+
+
+def check_arguments(arguments):
+    """
+    Check arguments and build dictionary arguments for FontPreview class
+
+    :param arguments: argparse arguments
+    :return: dictionary
+    """
+    # Initialize dictionary arguments
+    fp_args = {}
+    # Check all args passed in command line
+    if arguments.text:
+        fp_args['font_text'] = arguments.text
+    if arguments.bg_color:
+        fp_args['bg_color'] = arguments.bg_color
+    if arguments.fg_color:
+        fp_args['fg_color'] = arguments.fg_color
+    if arguments.image:
+        fp_args['bg_image'] = arguments.image
+    if arguments.dimension:
+        fp_args['dimension'] = tuple(arguments.dimension)
+    if arguments.text_position:
+        fp_args['font_position'] = arguments.text_position
+    if arguments.size:
+        fp_args['font_size'] = arguments.size
+    # Return dictionary
+    return fp_args
 
 
 if __name__ == '__main__':
     # Parse arguments
     option = parse_arguments()
     args = option.parse_args()
+    fpargs = check_arguments(args)
