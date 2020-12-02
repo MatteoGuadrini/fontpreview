@@ -103,4 +103,20 @@ if __name__ == '__main__':
 
     # Initialize object
     fp = FontPreview(**fpargs)
+
+    # Check other args
+    if args.image:
+        v_print(args.verbose, 'set background with image {0}'.format(args.image))
+        fp.bg_image = args.image
+        fp.draw()
+    if args.text_position:
+        v_print(args.verbose, 'set text position: "{0}"'.format(args.text_position))
+        fp.set_text_position(args.text_position)
+
+    # Save image
+    if args.save_path:
+        fp.save(args.save_path)
+    else:
+        fp.save()
+
     v_print(args.verbose, 'font object => {0}'.format(fp))
