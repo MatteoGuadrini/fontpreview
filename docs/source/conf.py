@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
 
-from fontpreview import VERSION
+from fontpreview.__version__ import VERSION
 
 # -- Project information -----------------------------------------------------
 

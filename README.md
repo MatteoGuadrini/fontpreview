@@ -181,6 +181,20 @@ fw.save('/tmp/fira_code.png')
 <img src="https://i.ibb.co/cvnPRdB/fira-code.png" alt="Fira code wall">
 <br><br>
 
+## Command line interface
+Along with the package, a command line tool based on this python package is installed. 
+The class used for command line previews is FontPreview. For all the options of this tool, 
+see the [docs](https://fontpreview.readthedocs.io/en/latest/cli.html), otherwise run `fp -h`.
+
+```console
+$ fp /tmp/noto.ttf
+```
+
+This command save a *fontpreview.png* in a current directory.
+
+<img src="https://i.ibb.co/258dCPZ/fp.png" alt="FontPreview object" width="350" height="150">
+<br><br>
+
 ## Open source
 _fontpreview_ is a open source project. Any contribute, It's welcome.
 
