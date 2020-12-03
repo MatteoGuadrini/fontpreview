@@ -1,6 +1,9 @@
 <img src="https://fontpreview.readthedocs.io/en/latest/_static/fp.png" alt="fontpreview package">
 <br>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7fc47024f17f4dffa3be08a7a5ab31bd)](https://app.codacy.com/app/MatteoGuadrini/fontpreview?utm_source=github.com&utm_medium=referral&utm_content=MatteoGuadrini/fontpreview&utm_campaign=Badge_Grade_Dashboard)
+[![CircleCI](https://circleci.com/gh/MatteoGuadrini/fontpreview.svg?style=svg)](https://circleci.com/gh/MatteoGuadrini/fontpreview)
+
 # fontpreview: Python library for font previews
 
 > This module is under development
