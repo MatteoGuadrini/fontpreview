@@ -12,7 +12,9 @@ jobs:
       - run: sudo chmod -R 777 /tmp
       - run: wget https://github.com/googlefonts/noto-fonts/raw/master/hinted/ttf/NotoSans/NotoSans-Regular.ttf -P /tmp
       - run: echo /tmp/NotoSans-Regular.ttf | python -m unittest test_fp.py
-      - run: sudo fp --version
+      - run: fp --version
+      - run: fp /tmp/NotoSans-Regular.ttf --save /tmp/noto_preview.png
+      - run: ls /tmp/noto_preview.png
 
 workflows:
   main:
