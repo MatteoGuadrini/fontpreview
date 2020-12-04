@@ -29,16 +29,21 @@ from PIL import Image
 # endregion
 
 # region functions
-def resize(image, size):
+def resize(image, bg_image):
     """
     Resize image
 
     :param image: image to resize
-    :param size: new size of image
-    :return: Image
+    :param bg_image: background image
+    :return: Image object
     """
+    # Check size of background image
+    new_size = image.size
+    while new_size > bg_image.size:
+        width, height = new_size
+        new_size = (int(width // 1.2), int(height // 1.2))
     # Resize image
-    return image.resize(size)
+    return image.resize(new_size)
 
 
 # endregion
@@ -156,8 +161,7 @@ class FontBanner(FontPreview):
             img = Image.open(image)
         # Check if the image is bigger than the banner
         if img.size > self.dimension:
-            width, height = self.dimension
-            img = resize(img, (width // 2, height // 2))
+            img = resize(img, self.image)
         # Add image
         self.image.paste(img, position)
 
