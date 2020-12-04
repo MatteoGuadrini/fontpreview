@@ -19,7 +19,10 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from pkg_resources import get_distribution
 
 from .fontpreview import FontPreview
 from .fontbanner import FontBanner, FontLogo, FontWall
 from .fontpage import FontPage, FontPageTemplate
+
+__version__ = get_distribution('fontpreview').version

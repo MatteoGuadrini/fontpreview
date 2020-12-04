@@ -22,7 +22,7 @@
 
 from argparse import ArgumentParser
 from fontpreview import FontPreview
-from fontpreview.__version__ import VERSION
+from fontpreview import __version__
 
 
 def parse_arguments():
@@ -38,7 +38,7 @@ def parse_arguments():
 
     # Create a principal parser
     parser_object = ArgumentParser(prog='fp', description='FontPreview cli', parents=[common_parser])
-    parser_object.add_argument('--version', '-V', action='version', version='%(prog)s ' + VERSION)
+    parser_object.add_argument('--version', '-V', action='version', version='%(prog)s ' + __version__)
     parser_object.add_argument('font', help='font file path')
     parser_object.add_argument('-t', '--text', help='text include to preview image (default: a b c d e f)', dest='text')
     parser_object.add_argument('-b', '--background', help='background color (default: white)', dest='bg_color')

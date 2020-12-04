@@ -21,14 +21,14 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import setup
-from fontpreview.__version__ import VERSION
+__version__ = '0.9.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='fontpreview',
-    version=VERSION,
+    version=__version__,
     packages=['fontpreview'],
     url='https://github.com/matteoguadrini/fontpreview',
     license='GNU General Public License v3.0',
