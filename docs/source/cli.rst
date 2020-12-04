@@ -3,6 +3,9 @@ Command line
 
 Here we explain how to use the *fontpreview* tool on the command line
 
+.. note::
+    If you want to use the command line tool, you need to install the system-wide library: ``pip install fontpreview``
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -56,8 +59,8 @@ Save *fontpreview* image in a current directory from font file:
 Advanced usage
 **************
 
-Use ```-v``` for debugging; ```-d``` setting dimension with **x** and **y** axis; ```-b``` setting background colors,
-```-f``` setting foreground colors, ```-p``` setting text position, ```-z``` setting font size and ```-s``` specified file path to save.
+Use ``-v`` for debugging; ``-d`` setting dimension with **x** and **y** axis; ``-b`` setting background colors,
+``-f`` setting foreground colors, ``-p`` setting text position, ``-z`` setting font size and ``-s`` specified file path to save.
 
 For the color reference: `colors <https://github.com/python-pillow/Pillow/blob/master/src/PIL/ImageColor.py>`_
 

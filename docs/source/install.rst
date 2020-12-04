@@ -21,3 +21,6 @@ Installation
 
     $ pip install --user fontpreview
 
+.. note::
+    If you want to use the command line tool, you need to install the system-wide library: ``pip install fontpreview``
+
