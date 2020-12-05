@@ -1,9 +1,10 @@
 <img src="https://fontpreview.readthedocs.io/en/latest/_static/fp.png" alt="fontpreview package">
 <br>
 
-# fontpreview: Python library for font previews
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a4e407dc1c5747c08fe8b1d984cb2676)](https://www.codacy.com/gh/MatteoGuadrini/fontpreview/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MatteoGuadrini/fontpreview&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/MatteoGuadrini/fontpreview.svg?style=svg)](https://circleci.com/gh/MatteoGuadrini/fontpreview)
 
-> This module is under development
+# fontpreview: Python library for font previews
 
 This is a library that allows you to create preview images from one or more selected fonts.
 
@@ -24,6 +25,8 @@ Use Pypi:
 ```console
 $ pip install --user fontpreview
 ```
+
+> **Note**: If you want to use the command line tool, you need to install the system-wide library: `pip install fontpreview`
 
 ## Simple usage
 
@@ -179,6 +182,20 @@ fw = FontWall(banners, max_tile=4)
 fw.save('/tmp/fira_code.png')
 ```
 <img src="https://i.ibb.co/cvnPRdB/fira-code.png" alt="Fira code wall">
+<br><br>
+
+## Command line interface
+Along with the package, a command line tool based on this python package is installed. 
+The class used for command line previews is FontPreview. For all the options of this tool, 
+see the [docs](https://fontpreview.readthedocs.io/en/latest/cli.html), otherwise run `fp -h`.
+
+```console
+$ fp /tmp/noto.ttf
+```
+
+This command save a *fontpreview.png* in a current directory.
+
+<img src="https://i.ibb.co/258dCPZ/fp.png" alt="FontPreview object" width="350" height="150">
 <br><br>
 
 ## Open source

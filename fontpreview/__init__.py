@@ -19,9 +19,13 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from pkg_resources import get_distribution, DistributionNotFound
 
 from .fontpreview import FontPreview
 from .fontbanner import FontBanner, FontLogo, FontWall
 from .fontpage import FontPage, FontPageTemplate
 
-VERSION = '0.9.0'
+try:
+    __version__ = get_distribution('fontpreview').version
+except DistributionNotFound:
+    __version__ = 'version not found'

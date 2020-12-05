@@ -16,6 +16,7 @@ In addition, the library includes some classes that allow the advanced creation 
 
    install
    example
+   cli
    package
 
 

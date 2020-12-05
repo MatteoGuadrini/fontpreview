@@ -21,14 +21,14 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import setup
-VERSION = '0.9.0'
+__version__ = '1.0.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='fontpreview',
-    version=VERSION,
+    version=__version__,
     packages=['fontpreview'],
     url='https://github.com/matteoguadrini/fontpreview',
     license='GNU General Public License v3.0',
@@ -46,5 +46,6 @@ setup(
             "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
             "Operating System :: OS Independent",
         ],
+    scripts=['bin/fp'],
     python_requires='>=3.6'
 )

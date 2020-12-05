@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
 
-from fontpreview import VERSION
+from fontpreview import __version__
 
 # -- Project information -----------------------------------------------------
 
@@ -34,7 +34,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest']
 templates_path = ['_templates']
 
 # The full version, including alpha/beta/rc tags
-release = VERSION
+release = __version__
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

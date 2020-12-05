@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@0.2.1
+
+jobs:
+  build-and-test:
+    executor: python/default
+    steps:
+      - checkout
+      - run: sudo python setup.py install
+      - run: sudo chmod -R 777 /tmp
+      - run: wget https://github.com/googlefonts/noto-fonts/raw/master/hinted/ttf/NotoSans/NotoSans-Regular.ttf -P /tmp
+      - run: echo /tmp/NotoSans-Regular.ttf | python -m unittest test_fp.py
+      - run: fp --version
+      - run: fp /tmp/NotoSans-Regular.ttf --save /tmp/noto_preview.png
+      - run: ls /tmp/noto_preview.png
+
+workflows:
+  main:
+    jobs:
+      - build-and-test
