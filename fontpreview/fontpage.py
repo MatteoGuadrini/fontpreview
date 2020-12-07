@@ -35,17 +35,37 @@ class FontPage:
     Class that represents the page of a font banners
     """
 
-    def __init__(self, template=None, dimension=(2480, 3508)):
+    def __init__(self, template=None, dimension=(2480, 3508), header=None, logo=None, body=None, footer=None):
         """
         Object that represents the page of a font banners
 
         :param template: template used to build the page
         :param dimension: dimension of page. Default A4 in pixels.
+        :param header: header of fontpage object
+        :param logo: logo of fontpage object on header part
+        :param body: body of fontpage object
+        :param footer: footer of fontpage object
         """
-        self.logo = None
-        self.header = None
-        self.body = None
-        self.footer = None
+        # Set header
+        if header:
+            self.set_header(header)
+        else:
+            self.header = None
+        # Set logo
+        if logo:
+            self.set_logo(logo)
+        else:
+            self.logo = None
+        # Set body
+        if body:
+            self.set_body(body)
+        else:
+            self.body = None
+        # Set footer
+        if footer:
+            self.set_footer(footer)
+        else:
+            self.footer = None
         self.template = template
         if self.template:
             self.dimension = (dimension[0], self.template.page_height)
