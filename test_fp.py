@@ -147,6 +147,39 @@ class TestFontPreview(unittest.TestCase):
         self.assertEqual(self.fpage_t.footer_font_size, 100)
         self.assertEqual(self.fpage_t.footer_units, self.fpage_t.unit * 2)
 
+    def test_declarative_object(self):
+        # FontPreview object
+        fp = FontPreview(font,
+                         font_size=50,
+                         font_text='some text',
+                         color_system='RGB',
+                         bg_color='blue',
+                         fg_color='yellow',
+                         dimension=(800, 400))
+        # FontBanner object
+        fb = FontBanner(font,
+                        orientation='portrait',
+                        bg_color='blue',
+                        fg_color='yellow',
+                        mode='paragraph',
+                        font_size=70,
+                        color_system='RGB')
+        # FontLogo object
+        fl = FontLogo(font,
+                      'Fl',
+                      size=(170, 170),
+                      bg_color='yellow',
+                      fg_color='blue',
+                      font_size=50,
+                      color_system='RGB')
+        # FontPage object
+        fpage = FontPage(header=fb, logo=fl, body=fb, footer=fb)
+        # test if instance has been created
+        self.assertIsInstance(fp, FontPreview)
+        self.assertIsInstance(fb, FontBanner)
+        self.assertIsInstance(fl, FontLogo)
+        self.assertIsInstance(fpage, FontPage)
+
 
 if __name__ == '__main__':
     unittest.main()
