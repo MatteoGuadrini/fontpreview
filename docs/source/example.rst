@@ -253,11 +253,11 @@ The units (default 6) are equal parts divided across the height of the page.
 Declarative object creation
 ***************************
 
-Each FontPreview based object in this module has a declarative instance implementation.
+Each *FontPreview* and *FontPage* based object in this module has a declarative instance implementation.
 
 .. code-block:: python
 
-    from fontpreview import FontPreview, FontBanner, FontLogo
+    from fontpreview import FontPreview, FontBanner, FontLogo, FontPage
     # FontPreview object
     fp = FontPreview('/tmp/noto.ttf',
                     font_size=50,
@@ -275,10 +275,13 @@ Each FontPreview based object in this module has a declarative instance implemen
                     font_size=70,
                     color_system='RGB')
     # FontLogo object
-    fb = FontLogo('/tmp/noto.ttf',
+    fl = FontLogo('/tmp/noto.ttf',
                     'Fl',
                     size=(170, 170),
-                    bg_color='blue',
-                    fg_color='yellow',
+                    bg_color='yellow',
+                    fg_color='blue',
                     font_size=50,
                     color_system='RGB')
+    # FontPage object
+    page = FontPage(header=fb, logo=fl, body=fb, footer=fb)
+    page.draw()

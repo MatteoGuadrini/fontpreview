@@ -46,6 +46,13 @@ class FontPage:
         :param body: body of fontpage object
         :param footer: footer of fontpage object
         """
+        self.template = template
+        if self.template:
+            self.dimension = (dimension[0], self.template.page_height)
+        else:
+            self.dimension = dimension
+        self.color_system = 'RGB'
+        self.page = Image.new(self.color_system, self.dimension, color='white')
         # Set header
         if header:
             self.set_header(header)
@@ -66,13 +73,6 @@ class FontPage:
             self.set_footer(footer)
         else:
             self.footer = None
-        self.template = template
-        if self.template:
-            self.dimension = (dimension[0], self.template.page_height)
-        else:
-            self.dimension = dimension
-        self.color_system = 'RGB'
-        self.page = Image.new(self.color_system, self.dimension, color='white')
 
     def __str__(self):
         """
