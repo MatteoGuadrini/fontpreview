@@ -180,6 +180,21 @@ class TestFontPreview(unittest.TestCase):
         self.assertIsInstance(fl, FontLogo)
         self.assertIsInstance(fpage, FontPage)
 
+    def test_other_color_system(self):
+        fp = self.fp
+        fb = self.fb
+        fl = self.fl
+        # define new color system
+        fp.color_system = 'CMYK'
+        # change background color
+        fp.bg_color = fb.bg_color = fl.bg_color = (51, 153, 193)
+        # change background color
+        fp.fg_color = fb.fg_color = fl.fg_color = (253, 194, 45)
+        # test draw it
+        fp.draw()
+        fb.draw()
+        fl.draw()
+
 
 if __name__ == '__main__':
     unittest.main()
