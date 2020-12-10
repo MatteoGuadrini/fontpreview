@@ -195,6 +195,21 @@ class TestFontPreview(unittest.TestCase):
         fb.draw()
         fl.draw()
 
+    def test_hex_color(self):
+        fp = self.fp
+        fb = self.fb
+        fl = self.fl
+        # define new color system
+        fp.color_system = 'CMYK'
+        # change background color
+        fp.bg_color = fb.bg_color = fl.bg_color = "#269cc3"
+        # change background color
+        fp.fg_color = fb.fg_color = fl.fg_color = "#ff0000"
+        # test draw it
+        fp.draw()
+        fb.draw()
+        fl.draw()
+
 
 if __name__ == '__main__':
     unittest.main()
