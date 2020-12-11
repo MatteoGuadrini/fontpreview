@@ -88,6 +88,19 @@ class TestFontPreview(unittest.TestCase):
         # Test FontBanner font size
         self.fl.set_font_size(50)
         self.assertEqual(self.fl.font.size, 50)
+        # Test FontPage and FontPageTemplate font size
+        template = FontPageTemplate()
+        template.set_header(120, 1, 'lcenter')
+        template.set_body(170, 3, 'lcenter')
+        template.set_footer(100, 2, 'lcenter')
+        fpage = FontPage(template=template)
+        fpage.set_header(self.fb)
+        fpage.set_body(self.fb)
+        fpage.set_footer(self.fb)
+        fpage.draw()
+        self.assertEqual(template.header_font_size, 120)
+        self.assertEqual(template.body_font_size, 170)
+        self.assertEqual(template.footer_font_size, 100)
 
     def test_text_position(self):
         # Test FontPreview font size
