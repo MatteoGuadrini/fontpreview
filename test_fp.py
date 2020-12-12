@@ -88,6 +88,24 @@ class TestFontPreview(unittest.TestCase):
         # Test FontBanner font size
         self.fl.set_font_size(50)
         self.assertEqual(self.fl.font.size, 50)
+        # Test FontPage and FontPageTemplate font size
+        template = FontPageTemplate()
+        template.set_header(90, 1, 'lcenter')
+        template.set_body(90, 3, 'lcenter')
+        template.set_footer(90, 2, 'lcenter')
+        fpage = FontPage(template=template)
+        fpage.set_header(self.fb)
+        fpage.set_body(self.fb)
+        fpage.set_footer(self.fb)
+        fpage.draw()
+        # FontPageTemplate font size
+        self.assertEqual(template.header_font_size, 90)
+        self.assertEqual(template.body_font_size, 90)
+        self.assertEqual(template.footer_font_size, 90)
+        # FontPage font size
+        self.assertEqual(fpage.header.font.size, 90)
+        self.assertEqual(fpage.body.font.size, 90)
+        self.assertEqual(fpage.footer.font.size, 90)
 
     def test_text_position(self):
         # Test FontPreview font size
@@ -96,6 +114,12 @@ class TestFontPreview(unittest.TestCase):
         self.fb.set_text_position('rcenter')
         # Test FontBanner font size
         self.fl.set_text_position('center')
+        # Test FontPreview font size
+        self.fp.set_text_position((100, 100))
+        # Test FontBanner font size
+        self.fb.set_text_position((100, 100))
+        # Test FontBanner font size
+        self.fl.set_text_position((100, 100))
 
     def test_set_text(self):
         # Test FontPreview font size
@@ -146,6 +170,69 @@ class TestFontPreview(unittest.TestCase):
         self.assertEqual(self.fpage_t.footer_text_position, 'right')
         self.assertEqual(self.fpage_t.footer_font_size, 100)
         self.assertEqual(self.fpage_t.footer_units, self.fpage_t.unit * 2)
+
+    def test_declarative_object(self):
+        # FontPreview object
+        fp = FontPreview(font,
+                         font_size=50,
+                         font_text='some text',
+                         color_system='RGB',
+                         bg_color='blue',
+                         fg_color='yellow',
+                         dimension=(800, 400))
+        # FontBanner object
+        fb = FontBanner(font,
+                        orientation='portrait',
+                        bg_color='blue',
+                        fg_color='yellow',
+                        mode='paragraph',
+                        font_size=70,
+                        color_system='RGB')
+        # FontLogo object
+        fl = FontLogo(font,
+                      'Fl',
+                      size=(170, 170),
+                      bg_color='yellow',
+                      fg_color='blue',
+                      font_size=50,
+                      color_system='RGB')
+        # FontPage object
+        fpage = FontPage(header=fb, logo=fl, body=fb, footer=fb)
+        # test if instance has been created
+        self.assertIsInstance(fp, FontPreview)
+        self.assertIsInstance(fb, FontBanner)
+        self.assertIsInstance(fl, FontLogo)
+        self.assertIsInstance(fpage, FontPage)
+
+    def test_other_color_system(self):
+        fp = self.fp
+        fb = self.fb
+        fl = self.fl
+        # define new color system
+        fp.color_system = 'CMYK'
+        # change background color
+        fp.bg_color = fb.bg_color = fl.bg_color = (51, 153, 193)
+        # change background color
+        fp.fg_color = fb.fg_color = fl.fg_color = (253, 194, 45)
+        # test draw it
+        fp.draw()
+        fb.draw()
+        fl.draw()
+
+    def test_hex_color(self):
+        fp = self.fp
+        fb = self.fb
+        fl = self.fl
+        # define new color system
+        fp.color_system = 'CMYK'
+        # change background color
+        fp.bg_color = fb.bg_color = fl.bg_color = "#269cc3"
+        # change background color
+        fp.fg_color = fb.fg_color = fl.fg_color = "#ff0000"
+        # test draw it
+        fp.draw()
+        fb.draw()
+        fl.draw()
 
 
 if __name__ == '__main__':

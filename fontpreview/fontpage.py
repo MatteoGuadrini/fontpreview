@@ -35,17 +35,17 @@ class FontPage:
     Class that represents the page of a font banners
     """
 
-    def __init__(self, template=None, dimension=(2480, 3508)):
+    def __init__(self, template=None, dimension=(2480, 3508), header=None, logo=None, body=None, footer=None):
         """
         Object that represents the page of a font banners
 
         :param template: template used to build the page
         :param dimension: dimension of page. Default A4 in pixels.
+        :param header: header of fontpage object
+        :param logo: logo of fontpage object on header part
+        :param body: body of fontpage object
+        :param footer: footer of fontpage object
         """
-        self.logo = None
-        self.header = None
-        self.body = None
-        self.footer = None
         self.template = template
         if self.template:
             self.dimension = (dimension[0], self.template.page_height)
@@ -53,6 +53,26 @@ class FontPage:
             self.dimension = dimension
         self.color_system = 'RGB'
         self.page = Image.new(self.color_system, self.dimension, color='white')
+        # Set header
+        if header:
+            self.set_header(header)
+        else:
+            self.header = None
+        # Set logo
+        if logo:
+            self.set_logo(logo)
+        else:
+            self.logo = None
+        # Set body
+        if body:
+            self.set_body(body)
+        else:
+            self.body = None
+        # Set footer
+        if footer:
+            self.set_footer(footer)
+        else:
+            self.footer = None
 
     def __str__(self):
         """
@@ -80,20 +100,20 @@ class FontPage:
             self.set_header(self.header)
             if self.header.image.height != self.template.header_units:
                 self.header.dimension = (self.page.width, self.template.header_units)
-                self.header.set_font_size(self.template.header_font_size)
-                self.header.set_text_position(self.template.header_text_position)
+            self.header.set_font_size(self.template.header_font_size)
+            self.header.set_text_position(self.template.header_text_position)
             # Compose body
             self.set_body(self.body)
             if self.body.image.height != self.template.body_units:
                 self.body.dimension = (self.page.width, self.template.body_units)
-                self.body.set_font_size(self.template.body_font_size)
-                self.body.set_text_position(self.template.body_text_position)
+            self.body.set_font_size(self.template.body_font_size)
+            self.body.set_text_position(self.template.body_text_position)
             # Compose footer
             self.set_footer(self.footer)
             if self.footer.image.height != self.template.footer_units:
                 self.footer.dimension = (self.page.width, self.template.footer_units)
-                self.footer.set_font_size(self.template.footer_font_size)
-                self.footer.set_text_position(self.template.footer_text_position)
+            self.footer.set_font_size(self.template.footer_font_size)
+            self.footer.set_text_position(self.template.footer_text_position)
         except AttributeError:
             raise AttributeError('header, body and footer is mandatory object')
 
