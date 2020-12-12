@@ -1,5 +1,16 @@
 # Release notes
 
+## 1.1.0
+Dec 12, 2020
+
+- Additions declaration mode for *FontPage* class
+- Additions *test_hex_color* method on TestFontPreview class
+- Additions *test_hex_color* method on TestFontPreview class
+- Additions *test_declarative_object* method on TestFontPreview class
+- Additions *test_other_color_system* method on TestFontPreview class
+- Fix TestFontPreview.test_font_size method and FontPage.__compose method
+- Fix test_text_position method on TestFontPreview class
+
 ## 1.0.0
 Dec 5, 2020
 

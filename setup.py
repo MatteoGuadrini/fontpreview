@@ -21,7 +21,7 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import setup
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
