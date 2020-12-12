@@ -114,6 +114,12 @@ class TestFontPreview(unittest.TestCase):
         self.fb.set_text_position('rcenter')
         # Test FontBanner font size
         self.fl.set_text_position('center')
+        # Test FontPreview font size
+        self.fp.set_text_position((100, 100))
+        # Test FontBanner font size
+        self.fb.set_text_position((100, 100))
+        # Test FontBanner font size
+        self.fl.set_text_position((100, 100))
 
     def test_set_text(self):
         # Test FontPreview font size
