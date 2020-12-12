@@ -90,17 +90,22 @@ class TestFontPreview(unittest.TestCase):
         self.assertEqual(self.fl.font.size, 50)
         # Test FontPage and FontPageTemplate font size
         template = FontPageTemplate()
-        template.set_header(120, 1, 'lcenter')
-        template.set_body(170, 3, 'lcenter')
-        template.set_footer(100, 2, 'lcenter')
+        template.set_header(90, 1, 'lcenter')
+        template.set_body(90, 3, 'lcenter')
+        template.set_footer(90, 2, 'lcenter')
         fpage = FontPage(template=template)
         fpage.set_header(self.fb)
         fpage.set_body(self.fb)
         fpage.set_footer(self.fb)
         fpage.draw()
-        self.assertEqual(template.header_font_size, 120)
-        self.assertEqual(template.body_font_size, 170)
-        self.assertEqual(template.footer_font_size, 100)
+        # FontPageTemplate font size
+        self.assertEqual(template.header_font_size, 90)
+        self.assertEqual(template.body_font_size, 90)
+        self.assertEqual(template.footer_font_size, 90)
+        # FontPage font size
+        self.assertEqual(fpage.header.font.size, 90)
+        self.assertEqual(fpage.body.font.size, 90)
+        self.assertEqual(fpage.footer.font.size, 90)
 
     def test_text_position(self):
         # Test FontPreview font size
