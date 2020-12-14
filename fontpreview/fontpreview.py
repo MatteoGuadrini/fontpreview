@@ -131,6 +131,14 @@ class FontPreview:
         draw = ImageDraw.Draw(self.image)
         draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font, align=align)
 
+    def show(self):
+        """
+        Displays this image.
+
+        :return: None
+        """
+        self.image.show()
+
     def set_font_size(self, size):
         """
         Set size of font
