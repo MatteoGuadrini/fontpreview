@@ -226,6 +226,14 @@ class FontPage:
         """
         self.page.save(path)
 
+    def show(self):
+        """
+        Displays this image.
+
+        :return: None
+        """
+        self.page.show()
+
 
 class FontPageTemplate:
     """
