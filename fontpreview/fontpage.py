@@ -269,12 +269,7 @@ class FontPageTemplate:
 
         :return: string
         """
-        return 'page_height={0}, unit={1}, header=height:{2},units:{3},text_position:{4}, ' \
-               'body=height:{2},units:{3},text_position:{4}, footer=height:{2},units:{3},text_position:{4}'.format(
-                self.page_height, self.unit, self.header_font_size, self.header_units, self.header_text_position,
-                self.body_font_size, self.body_units, self.body_text_position, self.footer_font_size, self.footer_units,
-                self.footer_text_position
-                )
+        return 'page_height={0}, unit={1}'.format(self.page_height, self.unit)
 
     def __check_units(self, context, unit):
         """
