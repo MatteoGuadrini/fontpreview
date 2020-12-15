@@ -77,6 +77,9 @@ class TestFontPreview(unittest.TestCase):
     def test_add_image(self):
         # test add image to FontBanner
         self.fb.add_image(self.fp, (500, 500))
+        # test resize in add image
+        fb_big = FontBanner(font, (2000, 2000))
+        self.fb.add_image(fb_big, (500, 500))
 
     def test_font_size(self):
         # Test FontPreview font size
