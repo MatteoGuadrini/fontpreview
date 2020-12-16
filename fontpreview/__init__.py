@@ -23,7 +23,7 @@ from pkg_resources import get_distribution, DistributionNotFound
 
 from .fontpreview import FontPreview
 from .fontbanner import FontBanner, FontLogo, FontWall
-from .fontpage import FontPage, FontPageTemplate
+from .fontpage import FontPage, FontPageTemplate, FontBooklet
 
 try:
     __version__ = get_distribution('fontpreview').version
