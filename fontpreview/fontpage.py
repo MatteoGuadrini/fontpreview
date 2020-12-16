@@ -340,4 +340,24 @@ class FontPageTemplate:
         self.footer_units = unit
         self.footer_text_position = text_position
 
+
+class FontBooklet:
+    """
+    Class that represents the booklet of a font page
+    """
+
+    def __init__(self, *pages):
+        """
+        Object that represents the booklet of a font page
+
+        :param pages: FontPage's object
+        """
+        self.pages = []
+        # Check foreach pages if FontPage object
+        for page in pages:
+            if isinstance(page, FontPage):
+                self.pages.append(page)
+            else:
+                raise ValueError("{0} isn't FontPage object".format(page))
+
 # endregion
