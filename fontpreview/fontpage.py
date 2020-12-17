@@ -361,6 +361,29 @@ class FontBooklet:
                 raise ValueError("{0} isn't FontPage object".format(page))
 
     def __iter__(self):
+        """
+        Iterating on each FontPage
+
+        :return: next value
+        """
         return iter(self.pages)
+
+    def save(self, folder, extension='png'):
+        """
+        Save on each FontPage image
+
+        :param folder: path folder where you want to save each font page
+        :param extension: extension of imge file. Default is 'png'
+        :return: None
+        """
+        # Define counter page
+        page_counter = 1
+        # Check folder path exists
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        # Save all page in folder path
+        for page in self:
+            page.save(os.path.join(folder, 'page{0}.{1}'.format(page_counter, extension)))
+            page_counter += 1
 
 # endregion
