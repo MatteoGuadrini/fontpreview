@@ -360,4 +360,7 @@ class FontBooklet:
             else:
                 raise ValueError("{0} isn't FontPage object".format(page))
 
+    def __iter__(self):
+        return iter(self.pages)
+
 # endregion
