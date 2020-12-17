@@ -242,6 +242,13 @@ class TestFontPreview(unittest.TestCase):
     def test_parse_not_fontpage_on_fontbooklet(self):
         self.assertRaises(ValueError, FontBooklet, self, self.fp, self.fw)
 
+    def test_iter_fontbooklet(self):
+        self.fpage.set_header(self.fb)
+        self.fpage.set_body(self.fb)
+        self.fpage.set_footer(self.fb)
+        for page in self.book:
+            page.draw()
+
 
 if __name__ == '__main__':
     unittest.main()
