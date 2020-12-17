@@ -132,7 +132,7 @@ class FontPage:
                 header.draw()
             self.header = header
         else:
-            raise ValueError('header must be FontPreview based object')
+            raise ValueError('header must be FontPreview based object, not {0}'.format(header))
 
     def set_logo(self, logo):
         """
@@ -154,7 +154,7 @@ class FontPage:
             else:
                 raise AttributeError('header attribute is None')
         else:
-            raise ValueError('logo must be FontLogo object')
+            raise ValueError('logo must be FontLogo object, not {0}'.format(logo))
 
     def set_body(self, body):
         """
@@ -171,7 +171,7 @@ class FontPage:
                 body.draw()
             self.body = body
         else:
-            raise ValueError('body must be FontPreview based object')
+            raise ValueError('body must be FontPreview based object, not {0}'.format(body))
 
     def set_footer(self, footer):
         """
@@ -188,7 +188,7 @@ class FontPage:
                 footer.draw()
             self.footer = footer
         else:
-            raise ValueError('footer must be FontPreview based object')
+            raise ValueError('footer must be FontPreview based object, not {0}'.format(footer))
 
     def draw(self, separator=True, sep_color='black', sep_width=5):
         """
