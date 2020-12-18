@@ -1,6 +1,6 @@
 import unittest
 import os
-from fontpreview import FontPreview, FontBanner, FontLogo, FontWall, FontPage, FontPageTemplate
+from fontpreview import FontPreview, FontBanner, FontLogo, FontWall, FontPage, FontPageTemplate, FontBooklet
 
 # Enter the file font to test and check exists
 font = input('Enter path of font file to test: ')
@@ -11,6 +11,7 @@ if not os.path.exists(font):
 class TestFontPreview(unittest.TestCase):
     fp, fb, fl = FontPreview(font), FontBanner(font), FontLogo(font, 'Fl')
     fw, fpage, fpage_t = FontWall([fb]), FontPage(), FontPageTemplate(3508)
+    book = FontBooklet(fpage, fpage)
 
     def test_instance(self):
         # test if instance has been created
@@ -20,6 +21,7 @@ class TestFontPreview(unittest.TestCase):
         self.assertIsInstance(self.fw, FontWall)
         self.assertIsInstance(self.fpage, FontPage)
         self.assertIsInstance(self.fpage_t, FontPageTemplate)
+        self.assertIsInstance(self.book, FontBooklet)
 
     def test_set_color_with_name(self):
         # change background color
@@ -77,6 +79,9 @@ class TestFontPreview(unittest.TestCase):
     def test_add_image(self):
         # test add image to FontBanner
         self.fb.add_image(self.fp, (500, 500))
+        # test resize in add image
+        fb_big = FontBanner(font, (2000, 2000))
+        self.fb.add_image(fb_big, (500, 500))
 
     def test_font_size(self):
         # Test FontPreview font size
@@ -233,6 +238,16 @@ class TestFontPreview(unittest.TestCase):
         fp.draw()
         fb.draw()
         fl.draw()
+
+    def test_parse_not_fontpage_on_fontbooklet(self):
+        self.assertRaises(ValueError, FontBooklet, self, self.fp, self.fw)
+
+    def test_iter_fontbooklet(self):
+        self.fpage.set_header(self.fb)
+        self.fpage.set_body(self.fb)
+        self.fpage.set_footer(self.fb)
+        for page in self.book:
+            page.draw()
 
 
 if __name__ == '__main__':

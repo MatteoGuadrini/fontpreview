@@ -122,6 +122,26 @@ fpage.save('/tmp/fpage_template.png')
 <img src="https://i.ibb.co/qJjMGpr/fpage-template.png" alt="FontPage with template object" width="650" height="850">
 <br><br>
 
+Font booklet example:
+```python
+from fontpreview import FontPage, FontBanner, FontBooklet
+
+# Define the various parts of page
+header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
+footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+# Create FontPage object
+fpage1 = FontPage(header=header, body=body, footer=footer)
+fpage2 = FontPage(header=header, body=body, footer=footer)
+# Design all parts
+fpage1.draw()
+fpage2.draw()
+# Create book
+book = FontBooklet(fpage1, fpage2)
+book.save('/tmp/noto_book/')        # save page1.png, page2.png in /tmp/noto_book/ folder
+
+```
+
 ## Advanced usage
 
 Below is an example of various previews of the _"Fira Code regular"_ font. 

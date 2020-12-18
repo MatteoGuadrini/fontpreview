@@ -1,5 +1,13 @@
 # Release notes
 
+## 1.2.0
+Dec 12, 2020
+
+- Additions show method on *FontPreview*, *FontWall*, *FontPage* class
+- Additions _FontBooklet_ class
+- Fix FontPageTemplate *\__str\__* method
+- Fix message raises on set_header/logo/body/footer method on _FontPage_ class
+
 ## 1.1.0
 Dec 12, 2020
 

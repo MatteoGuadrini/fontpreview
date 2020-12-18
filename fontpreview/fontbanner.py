@@ -355,4 +355,12 @@ class FontWall:
         """
         self.wall.save(path)
 
+    def show(self):
+        """
+        Displays this image.
+
+        :return: None
+        """
+        self.wall.show()
+
 # endregion

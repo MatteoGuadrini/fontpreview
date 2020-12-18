@@ -132,7 +132,7 @@ class FontPage:
                 header.draw()
             self.header = header
         else:
-            raise ValueError('header must be FontPreview based object')
+            raise ValueError('header must be FontPreview based object, not {0}'.format(header))
 
     def set_logo(self, logo):
         """
@@ -154,7 +154,7 @@ class FontPage:
             else:
                 raise AttributeError('header attribute is None')
         else:
-            raise ValueError('logo must be FontLogo object')
+            raise ValueError('logo must be FontLogo object, not {0}'.format(logo))
 
     def set_body(self, body):
         """
@@ -171,7 +171,7 @@ class FontPage:
                 body.draw()
             self.body = body
         else:
-            raise ValueError('body must be FontPreview based object')
+            raise ValueError('body must be FontPreview based object, not {0}'.format(body))
 
     def set_footer(self, footer):
         """
@@ -188,7 +188,7 @@ class FontPage:
                 footer.draw()
             self.footer = footer
         else:
-            raise ValueError('footer must be FontPreview based object')
+            raise ValueError('footer must be FontPreview based object, not {0}'.format(footer))
 
     def draw(self, separator=True, sep_color='black', sep_width=5):
         """
@@ -226,6 +226,14 @@ class FontPage:
         """
         self.page.save(path)
 
+    def show(self):
+        """
+        Displays this image.
+
+        :return: None
+        """
+        self.page.show()
+
 
 class FontPageTemplate:
     """
@@ -261,12 +269,7 @@ class FontPageTemplate:
 
         :return: string
         """
-        return 'page_height={0}, unit={1}, header=height:{2},units:{3},text_position:{4}, ' \
-               'body=height:{2},units:{3},text_position:{4}, footer=height:{2},units:{3},text_position:{4}'.format(
-                self.page_height, self.unit, self.header_font_size, self.header_units, self.header_text_position,
-                self.body_font_size, self.body_units, self.body_text_position, self.footer_font_size, self.footer_units,
-                self.footer_text_position
-                )
+        return 'page_height={0}, unit={1}'.format(self.page_height, self.unit)
 
     def __check_units(self, context, unit):
         """
@@ -336,5 +339,51 @@ class FontPageTemplate:
         self.__check_units('footer', unit)
         self.footer_units = unit
         self.footer_text_position = text_position
+
+
+class FontBooklet:
+    """
+    Class that represents the booklet of a font page
+    """
+
+    def __init__(self, *pages):
+        """
+        Object that represents the booklet of a font page
+
+        :param pages: FontPage's object
+        """
+        self.pages = []
+        # Check foreach pages if FontPage object
+        for page in pages:
+            if isinstance(page, FontPage):
+                self.pages.append(page)
+            else:
+                raise ValueError("{0} isn't FontPage object".format(page))
+
+    def __iter__(self):
+        """
+        Iterating on each FontPage
+
+        :return: next value
+        """
+        return iter(self.pages)
+
+    def save(self, folder, extension='png'):
+        """
+        Save on each FontPage image
+
+        :param folder: path folder where you want to save each font page
+        :param extension: extension of imge file. Default is 'png'
+        :return: None
+        """
+        # Define counter page
+        page_counter = 1
+        # Check folder path exists
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        # Save all page in folder path
+        for page in self:
+            page.save(os.path.join(folder, 'page{0}.{1}'.format(page_counter, extension)))
+            page_counter += 1
 
 # endregion
