@@ -250,6 +250,29 @@ The units (default 6) are equal parts divided across the height of the page.
 .. image:: https://i.ibb.co/n7L9nNG/fpage-template.png
     :alt: FontPage image
 
+FontBooklet example
+*******************
+
+*FontBooklet* is a class that represents a book of *FontPage* object.
+
+.. code-block:: python
+
+    from fontpreview import FontPage, FontBanner, FontBooklet
+    # Define the various parts of page
+    header = FontBanner('/tmp/noto.ttf', 'landscape' , mode='fontname')
+    body = FontBanner('/tmp/noto.ttf', 'landscape' , mode='paragraph')
+    footer = FontBanner('/tmp/noto.ttf', 'landscape' , mode='letter')
+    # Create FontPage object
+    fpage1 = FontPage(header=header, body=body, footer=footer)
+    fpage2 = FontPage(header=header, body=body, footer=footer)
+    # Design all parts
+    fpage1.draw()
+    fpage2.draw()
+    # Create book
+    book = FontBooklet(fpage1, fpage2)
+    book.save('/tmp/noto_book/')        # save page1.png, page2.png in /tmp/noto_book/ folder
+
+
 Declarative object creation
 ***************************
 
