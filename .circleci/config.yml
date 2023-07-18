@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.1.1
 
 orbs:
   python: circleci/python@0.2.1
