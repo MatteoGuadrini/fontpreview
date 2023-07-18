@@ -3,6 +3,7 @@
 # vim: se ts=4 et syn=python:
 
 # created by: matteo.guadrini
+# edited by: Parijat Das / https://t.me/parijatsoftwares 
 # fontpreview -- fontpreview
 #
 #     Copyright (C) 2020 Matteo Guadrini <matteo.guadrini@hotmail.it>
@@ -101,7 +102,7 @@ class FontPreview:
         img = ImageDraw.Draw(self.image)
         # Check font size
         text_size = img.multiline_textsize(self.font_text, self.font)
-        while text_size > self.dimension:
+        while text_size[0] > self.dimension[0] or text_size[1] > self.dimension[1]:
             self.font_size = self.font_size - 2
             self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
             text_size = img.multiline_textsize(self.font_text, self.font)
@@ -128,7 +129,24 @@ class FontPreview:
         # Draw background with flat color
         else:
             self.image = Image.new(self.color_system, self.dimension, color=self.bg_color)
+
+        # Create image drawer
         draw = ImageDraw.Draw(self.image)
+        text_size = draw.multiline_textsize(self.font_text, self.font)
+
+        # Adjust font size if necessary to fit within the image
+        if text_size[0] > self.dimension[0] or text_size[1] > self.dimension[1]:
+            font_ratio = min(self.dimension[0] / text_size[0], self.dimension[1] / text_size[1])
+            self.font_size = int(self.font_size * font_ratio)
+            self.font = ImageFont.truetype(font=self.font.path, size=self.font_size)
+            text_size = draw.multiline_textsize(self.font_text, self.font)
+
+        # Calculate the position to center the text
+        x_center = (self.dimension[0] - text_size[0]) // 2
+        y_center = (self.dimension[1] - text_size[1]) // 2
+        self.font_position = (x_center, y_center)
+
+        # Draw the text
         draw.text(self.font_position, self.font_text, fill=self.fg_color, font=self.font, align=align)
 
     def show(self):
