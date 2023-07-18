@@ -1,5 +1,10 @@
 # Release notes
 
+## 1.2.1
+Jul 18, 2023
+
+- Fixed text centering offset in *FontPreview* class
+
 ## 1.2.0
 Dec 12, 2020
 
